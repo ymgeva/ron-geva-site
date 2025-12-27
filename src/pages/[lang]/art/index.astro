@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { useTranslatedPath } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'he' } }];
+}
+
+const { lang } = Astro.params;
+const translatePath = useTranslatedPath(lang as any);
+
+const categories = {
+  he: [
+    {
+      slug: 'color',
+      title: 'צבע',
+      image: '/images/art-color-2.jpg',
+      count: 66,
+    },
+    {
+      slug: 'bw',
+      title: 'שחור לבן',
+      image: '/images/art-bw-2.jpg',
+      count: 61,
+    },
+    {
+      slug: 'sculptures',
+      title: 'פסלים',
+      image: '/images/art-sculptures-2.jpg',
+      count: 50,
+    },
+    {
+      slug: 'portraits',
+      title: 'דיוקנאות בהזמנה',
+      image: '/images/art-portraits-2.jpg',
+      count: 40,
+    },
+    {
+      slug: 'postcards',
+      title: 'גלויות ועוד',
+      image: '/images/art-postcards-2.jpg',
+      count: 13,
+    },
+  ],
+  en: [
+    {
+      slug: 'color',
+      title: 'Color',
+      image: '/images/art-color-2.jpg',
+      count: 66,
+    },
+    {
+      slug: 'bw',
+      title: 'Black & White',
+      image: '/images/art-bw-2.jpg',
+      count: 61,
+    },
+    {
+      slug: 'sculptures',
+      title: 'Sculptures',
+      image: '/images/art-sculptures-2.jpg',
+      count: 50,
+    },
+    {
+      slug: 'portraits',
+      title: 'Commissioned Portraits',
+      image: '/images/art-portraits-2.jpg',
+      count: 40,
+    },
+    {
+      slug: 'postcards',
+      title: 'Postcards & More',
+      image: '/images/art-postcards-2.jpg',
+      count: 13,
+    },
+  ],
+};
+
+const pageTitle = lang === 'he' ? 'אומנות' : 'Art';
+const currentCategories = categories[lang as keyof typeof categories] || categories.en;
+---
+
+<BaseLayout title={pageTitle}>
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-12 text-center font-fahkwang">{pageTitle}</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      {currentCategories.map((category) => (
+        <a
+          href={translatePath(`/art/${category.slug}`)}
+          class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+        >
+          <div class="aspect-square">
+            <img
+              src={category.image}
+              alt={category.title}
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-100 group-hover:opacity-90 transition-opacity">
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <h2 class="text-white text-2xl font-bold mb-2 font-fahkwang">{category.title}</h2>
+                <p class="text-white/80 text-sm">{category.count} {lang === 'he' ? 'עבודות' : 'works'}</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

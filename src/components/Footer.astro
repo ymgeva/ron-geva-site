@@ -1,0 +1,67 @@
+---
+import { getLangFromUrl } from '../utils/i18n';
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<footer class="bg-gray-100 border-t border-gray-300 mt-auto">
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
+    <!-- Horizontal Layout: Name | Email Button | Social Icons -->
+    <div class="flex items-center justify-center gap-6 flex-wrap">
+      <!-- Name -->
+      <h2 class="text-lg font-bold font-alef tracking-wider text-gray-700">
+        <a href={lang === 'he' ? '/he' : '/en'} class="hover:text-gray-900 transition">
+          {lang === 'he' ? 'רון גבע' : 'Ron Geva'}
+        </a>
+      </h2>
+      
+      <!-- Email Button -->
+      <a
+        href="mailto:rongogeva@gmail.com"
+        class="bg-gray-600 bg-opacity-75 hover:bg-gray-700 text-white px-4 py-2 rounded-full transition flex items-center gap-2"
+        aria-label="Mail"
+      >
+        <i class="fas fa-envelope"></i>
+        <span class="sr-only">Mail</span>
+      </a>
+      
+      <!-- Social Media Icons -->
+      <div class="flex items-center gap-3">
+        <a
+          href="https://www.linkedin.com/in/ron-geva-14787339b/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-600 hover:text-blue-600 transition text-xl"
+          aria-label="LinkedIn"
+        >
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a
+          href="tel:+972523670758"
+          class="text-gray-600 hover:text-green-500 transition text-xl"
+          aria-label="WhatsApp"
+        >
+          <i class="fab fa-whatsapp"></i>
+        </a>
+        <a
+          href="https://www.instagram.com/rongevaart/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-600 hover:text-pink-500 transition text-xl"
+          aria-label="Instagram"
+        >
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a
+          href="https://www.facebook.com/Rongostuff"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-600 hover:text-blue-500 transition text-xl"
+          aria-label="Facebook"
+        >
+          <i class="fab fa-facebook"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

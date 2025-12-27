@@ -1,0 +1,227 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+locale: he
+i18n:
+  structure: multiple_folders
+  locales: [en, he]
+  default_locale: en
+
+collections:
+  # Artworks Collection
+  - name: "artworks"
+    label: "יצירות אמנות / Artworks"
+    folder: "src/content/artworks"
+    create: true
+    i18n: true
+    slug: "{{category}}-{{slug}}"
+    fields:
+      - { label: "כותרת / Title", name: "title", widget: "string", i18n: true }
+      - {
+          label: "קטגוריה / Category",
+          name: "category",
+          widget: "select",
+          options:
+            [
+              { label: "צבעוני / Color", value: "color" },
+              { label: "דיוקנאות / Portraits", value: "portraits" },
+              { label: "שחור לבן / Black & White", value: "bw" },
+              { label: "פסלים / Sculptures", value: "sculptures" },
+              { label: "גלויות / Postcards", value: "postcards" },
+            ],
+          i18n: duplicate,
+        }
+      - { label: "תמונה / Image", name: "image", widget: "image", i18n: duplicate }
+      - {
+          label: "שנה / Year",
+          name: "year",
+          widget: "number",
+          required: false,
+          i18n: duplicate,
+        }
+      - {
+          label: "טכניקה / Medium",
+          name: "medium",
+          widget: "string",
+          required: false,
+          i18n: true,
+        }
+      - {
+          label: "מידות / Dimensions",
+          name: "dimensions",
+          widget: "string",
+          required: false,
+          i18n: true,
+        }
+      - {
+          label: "תיאור / Description",
+          name: "description",
+          widget: "text",
+          required: false,
+          i18n: true,
+        }
+      - {
+          label: "סדר תצוגה / Display Order",
+          name: "order",
+          widget: "number",
+          required: false,
+          i18n: duplicate,
+        }
+      - { label: "Body", name: "body", widget: "markdown", required: false, i18n: true }
+
+  # Blog Collection
+  - name: "blog"
+    label: "בלוג / Blog"
+    folder: "src/content/blog"
+    create: true
+    i18n: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "כותרת / Title", name: "title", widget: "string", i18n: true }
+      - {
+          label: "תאריך פרסום / Publish Date",
+          name: "pubDate",
+          widget: "datetime",
+          i18n: duplicate,
+        }
+      - {
+          label: "תיאור / Description",
+          name: "description",
+          widget: "text",
+          required: false,
+          i18n: true,
+        }
+      - {
+          label: "תמונה ראשית / Featured Image",
+          name: "featuredImage",
+          widget: "image",
+          required: false,
+          i18n: duplicate,
+        }
+      - {
+          label: "מחבר / Author",
+          name: "author",
+          widget: "string",
+          default: "Ron Geva",
+          i18n: duplicate,
+        }
+      - {
+          label: "טיוטה / Draft",
+          name: "draft",
+          widget: "boolean",
+          default: false,
+          i18n: duplicate,
+        }
+      - { label: "תוכן / Body", name: "body", widget: "markdown", i18n: true }
+
+  # Pages Collection
+  - name: "pages"
+    label: "עמודים / Pages"
+    folder: "src/content/pages"
+    create: true
+    i18n: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "כותרת / Title", name: "title", widget: "string", i18n: true }
+      - {
+          label: "תיאור / Description",
+          name: "description",
+          widget: "text",
+          required: false,
+          i18n: true,
+        }
+      - {
+          label: "תמונה ראשית / Featured Image",
+          name: "featuredImage",
+          widget: "image",
+          required: false,
+          i18n: duplicate,
+        }
+      - { label: "תוכן / Body", name: "body", widget: "markdown", i18n: true }
+
+  # Book Page (Special Collection)
+  - name: "book-content"
+    label: "תוכן עמוד הספר / Book Page Content"
+    folder: "src/content/pages"
+    create: false
+    i18n: true
+    filter: { field: "slug", value: "book" }
+    fields:
+      - { label: "כותרת / Title", name: "title", widget: "string", i18n: true }
+      - {
+          label: "כותרת משנה / Subtitle",
+          name: "subtitle",
+          widget: "string",
+          required: false,
+          i18n: true,
+        }
+      - { label: "תמונת הספר / Book Cover", name: "featuredImage", widget: "image", i18n: duplicate }
+      - {
+          label: "תיאור / Description",
+          name: "description",
+          widget: "text",
+          i18n: true,
+        }
+      - {
+          label: "מספר עמודים / Page Count",
+          name: "pageCount",
+          widget: "number",
+          required: false,
+          i18n: duplicate,
+        }
+      - {
+          label: "הוצאה לאור / Publisher",
+          name: "publisher",
+          widget: "string",
+          required: false,
+          i18n: true,
+        }
+      - {
+          label: "קישור לרכישה (דיגיטלי) / Digital Purchase Link",
+          name: "purchaseLinkDigital",
+          widget: "string",
+          required: false,
+          i18n: duplicate,
+        }
+      - {
+          label: "קישור לרכישה (מודפס) / Print Purchase Link",
+          name: "purchaseLinkPrint",
+          widget: "string",
+          required: false,
+          i18n: duplicate,
+        }
+      - {
+          label: "קטעי אודיו / Audio Clips",
+          name: "audioClips",
+          widget: "list",
+          required: false,
+          i18n: duplicate,
+          fields:
+            [
+              { label: "כותרת / Title", name: "title", widget: "string" },
+              { label: "קישור / URL", name: "url", widget: "string" },
+            ],
+        }
+      - {
+          label: "ביקורות / Reviews",
+          name: "reviews",
+          widget: "list",
+          required: false,
+          i18n: true,
+          fields:
+            [
+              { label: "ציטוט / Quote", name: "quote", widget: "text" },
+              { label: "מחבר / Author", name: "author", widget: "string" },
+              {
+                label: "מקור / Source",
+                name: "source",
+                widget: "string",
+                required: false,
+              },
+            ],
+        }
+      - { label: "תוכן מלא / Full Content", name: "body", widget: "markdown", i18n: true }

@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../utils/i18n';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'he' } }];
+}
+
+const { lang } = Astro.params;
+const title = lang === 'he' ? 'רון גבע - אמנות מהסוג המרגש' : 'Ron Geva - Art of the Moving Kind';
+---
+
+<BaseLayout title={title}>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-6xl mx-auto px-4 py-8">
+    <!-- Art -->
+    <a \n      href={`/${lang}/art`}
+      class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 aspect-[16/9]"
+    >
+      <img 
+        src="/images/home-2.jpg" 
+        alt={lang === 'he' ? 'אמנות' : 'Art'}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div class="absolute bottom-0 {lang === 'he' ? 'right-0' : 'left-0'} bg-gray-700/90 text-white px-8 py-4">
+        <h2 class="text-3xl font-bold font-fahkwang">
+          {lang === 'he' ? 'אמנות' : 'Art'}
+        </h2>
+      </div>
+    </a>
+
+    <!-- About -->
+    <a 
+      href={`/${lang}/about`}
+      class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 aspect-[16/9]"
+    >
+      <img 
+        src="/images/home-4.jpg" 
+        alt={lang === 'he' ? 'אודות' : 'About'}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div class="absolute bottom-0 {lang === 'he' ? 'right-0' : 'left-0'} bg-gray-700/90 text-white px-8 py-4">
+        <h2 class="text-3xl font-bold font-fahkwang">
+          {lang === 'he' ? 'אודות' : 'About'}
+        </h2>
+      </div>
+    </a>
+
+    <!-- Blog -->
+    <a 
+      href={`/${lang}/blog`}
+      class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 aspect-[16/9]"
+    >
+      <img 
+        src="/images/home-3.jpg" 
+        alt={lang === 'he' ? 'בלוג' : 'Blog'}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div class="absolute bottom-0 {lang === 'he' ? 'right-0' : 'left-0'} bg-gray-700/90 text-white px-8 py-4">
+        <h2 class="text-3xl font-bold font-fahkwang">
+          {lang === 'he' ? 'בלוג' : 'Blog'}
+        </h2>
+      </div>
+    </a>
+
+    <!-- Book -->
+    <a 
+      href={`/${lang}/book`}
+      class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 aspect-[16/9]"
+    >
+      <img 
+        src="/images/home-5.jpg" 
+        alt={lang === 'he' ? 'ספר' : 'Book'}
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+      />
+      <div class="absolute bottom-0 {lang === 'he' ? 'right-0' : 'left-0'} bg-gray-700/90 text-white px-8 py-4">
+        <h2 class="text-3xl font-bold font-fahkwang">
+          {lang === 'he' ? 'ספר' : 'Book'}
+        </h2>
+      </div>
+    </a>
+  </div>
+</BaseLayout>

@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Lightbox from '../../../components/Lightbox.astro';
+
+export async function getStaticPaths() {
+  const categories = ['color', 'portraits', 'bw', 'sculptures', 'postcards'];
+  const locales = ['en', 'he'];
+  
+  const paths = [];
+  for (const lang of locales) {
+    for (const category of categories) {
+      paths.push({
+        params: { lang, category },
+      });
+    }
+  }
+  
+  return paths;
+}
+
+const { lang, category } = Astro.params;
+
+// Category metadata with image counts (after removing social icons)
+const categoryData = {
+  color: { he: 'צבע', en: 'Color', count: 66 },
+  bw: { he: 'שחור לבן', en: 'Black & White', count: 61 },
+  sculptures: { he: 'פסלים', en: 'Sculptures', count: 50 },
+  portraits: { he: 'דיוקנאות בהזמנה', en: 'Commissioned Portraits', count: 40 },
+  postcards: { he: 'גלויות ועוד', en: 'Postcards & More', count: 13 },
+};
+
+const currentCategory = categoryData[category as keyof typeof categoryData];
+const title = currentCategory[lang as keyof typeof currentCategory] as string;
+
+// Generate array of image paths for this category
+// Images start from index 2 (index 1 is the logo/nav image)
+const imageCount = currentCategory.count;
+const images = Array.from({ length: imageCount - 1 }, (_, i) => {
+  const index = i + 2;
+  return {
+    src: `/images/art-${category}-${index}.jpg`,
+    alt: `${title} ${i + 1}`,
+  };
+});
+---
+
+<BaseLayout title={title}>
+  <div class="container mx-auto px-4 py-12">
+    <div class="mb-8">
+      <a 
+        href={`/${lang}/art`}
+        class="text-gray-600 hover:text-gray-900 transition inline-flex items-center gap-2 mb-4"
+      >
+        <span class="text-xl">{lang === 'he' ? '→' : '←'}</span>
+        {lang === 'he' ? 'חזרה לאומנות' : 'Back to Art'}
+      </a>
+      <h1 class="text-4xl font-bold font-fahkwang">{title}</h1>
+    </div>
+    
+    <!-- Masonry Grid Layout -->
+    <div 
+      class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4"
+      dir="ltr"
+    >
+      {images.map((image) => (
+        <div class="break-inside-avoid">
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="gallery-image w-full rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+  
+  <Lightbox />
+</BaseLayout>

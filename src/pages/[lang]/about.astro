@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../utils/i18n';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'he' } }];
+}
+
+const { lang } = Astro.params;
+const title = lang === 'he' ? 'אודות' : 'About';
+const pageTitle = lang === 'he' ? 'אודות - רון גבע' : 'About - Ron Geva';
+---
+
+<BaseLayout title={pageTitle}>
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    {lang === 'he' ? (
+      <div class="space-y-6">
+        <!-- Profile Image -->
+        <div class="flex justify-center mb-8">
+          <img 
+            src="/images/about-2.jpg" 
+            alt="רון גבע" 
+            class="rounded-lg shadow-lg max-w-md w-full"
+          />
+        </div>
+
+        <!-- Contact Info -->
+        <div class="text-center space-y-2 text-gray-600">
+          <p>
+            <a href="tel:+972523670758" class="hover:text-gray-800 transition-colors">
+              052-3670758
+            </a>
+          </p>
+          <p>
+            <a href="mailto:rongogeva@gmail.com?subject=I%20got%20your%20mail%20from%20the%20site" class="hover:text-gray-800 transition-colors">
+              rongogeva@gmail.com
+            </a>
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="prose prose-lg max-w-none text-justify space-y-4">
+          <p>היי!</p>
+
+          <p>אני רון, גרה בישוב בשרון עם איש אחד טוב, שלושה ילדים, מלא חיות והר של כביסה. אני אמנית רב תחומית ומטפלת באמנות.</p>
+
+          <p>למדתי ועסקתי באמנות רוב חיי. אמנות עבורי היא אופן חשיבה יצירתי ומשחקי, פתוח וחי. היא דרך המלך לגעת בלב הפועם של החיים, לעורר רגשות, לאחד, לנחם, להקל, לראות, ולצעוד קדימה זקופים ומלאים יותר. יש בה כוח ריפוי גדול, והיא דרך ליצירת קשר וחיבור בין עולמות ונפשות.</p>
+
+          <p>צעדתי בהרבה דרכים כיוצרת - רישום, פיסול, מיצבים, תיאטרון, קולנוע, <a href={`/${lang}/blog`} class="text-blue-600 hover:text-blue-800 underline">אנימציה</a>, כתיבת פרוזה ושירה. אני חוקרת וחופרת ויוצרת ומצמיחה ומתרגשת כל הזמן.</p>
+
+          <p>כעת אני מטפלת באמנות (MA אוניברסיטת חיפה), מגשימה חלום ילדות שהיה לי מאז ומתמיד - ללוות א.נשים בדרכם, להכיל את הכאב ולהחזיק את התקווה.</p>
+
+          <p>האתר הזה מציג חלק מיצירות <a href={`/${lang}/art`} class="text-blue-600 hover:text-blue-800 underline">האמנות</a> שיצרתי במהלך השנים וכן את <a href={`/${lang}/book`} class="text-blue-600 hover:text-blue-800 underline">ספר השירים</a> שלי "מַלווה נשמות לחתולים אובדניים" שיצא השנה לאור. <a href={`/${lang}/blog`} class="text-blue-600 hover:text-blue-800 underline">בבלוג</a> אני משתפת על עשייתי האמנותית.</p>
+        </div>
+
+        <!-- External Links -->
+        <div class="flex flex-wrap gap-4 mt-8 justify-center">
+          <a 
+            href="https://www.artstherapieslibrary.com/search?term=%D7%A8%D7%95%D7%9F+%D7%92%D7%91%D7%A2" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-[#5B4D43] text-white rounded hover:bg-[#4a3d35] transition-colors"
+          >
+            ספרייה →
+          </a>
+          <a 
+            href="https://bookscatharsis.com/product/%d7%9e%d6%b7%d7%9c%d7%95%d7%95%d7%94-%d7%a0%d7%a9%d7%9e%d7%95%d7%aa-%d7%9c%d7%97%d7%aa%d7%95%d7%9c%d7%99%d7%9d-%d7%90%d7%95%d7%91%d7%93%d7%a0%d7%99%d7%99%d7%9d/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-[#5B4D43] text-white rounded hover:bg-[#4a3d35] transition-colors"
+          >
+            קתרזיס →
+          </a>
+          <a 
+            href="https://www.hebpsy.net/showprofile.asp?id=54561" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-[#5B4D43] text-white rounded hover:bg-[#4a3d35] transition-colors"
+          >
+            עמוד מטפל →
+          </a>
+          <a 
+            href="https://www.yahat.org/therapists/info.aspx?id=5917" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-[#5B4D43] text-white rounded hover:bg-[#4a3d35] transition-colors"
+          >
+            עמוד מטפל →
+          </a>
+        </div>
+      </div>
+    ) : (
+      <div class="space-y-6">
+        <!-- Profile Image -->
+        <div class="flex justify-center mb-8">
+          <img 
+            src="/images/about-2.jpg" 
+            alt="Ron Geva" 
+            class="rounded-lg shadow-lg max-w-md w-full"
+          />
+        </div>
+
+        <!-- Contact Info -->
+        <div class="text-center space-y-2 text-gray-600">
+          <p>
+            <a href="tel:+972523670758" class="hover:text-gray-800 transition-colors">
+              052-3670758
+            </a>
+          </p>
+          <p>
+            <a href="mailto:rongogeva@gmail.com?subject=I%20got%20your%20mail%20from%20the%20site" class="hover:text-gray-800 transition-colors">
+              rongogeva@gmail.com
+            </a>
+          </p>
+        </div>
+
+        <!-- Main Content -->
+        <div class="prose prose-lg max-w-none text-justify space-y-4">
+          <p>Hi!</p>
+
+          <p>I'm Ron, living in a village in the Sharon region with one good man, three children, lots of animals, and a mountain of laundry. I'm an interdisciplinary artist and art therapist.</p>
+
+          <p>I've studied and engaged with art most of my life. For me, art is a creative and playful way of thinking, open and alive. It's the royal road to touching the beating heart of life, to awakening emotions, to unite, comfort, ease, see, and move forward more upright and full. It has great healing power and is a way to create connection and bonding between worlds and souls.</p>
+
+          <p>I've walked many paths as a creator - drawing, sculpture, installations, theater, cinema, <a href={`/${lang}/blog`} class="text-blue-600 hover:text-blue-800 underline">animation</a>, writing prose and poetry. I research, dig, create, grow, and get excited all the time.</p>
+
+          <p>Currently, I'm an art therapist (MA from the University of Haifa), fulfilling a childhood dream I've always had - to accompany people on their journey, to contain the pain and hold the hope.</p>
+
+          <p>This website presents some of the <a href={`/${lang}/art`} class="text-blue-600 hover:text-blue-800 underline">artworks</a> I've created over the years, as well as my <a href={`/${lang}/book`} class="text-blue-600 hover:text-blue-800 underline">poetry book</a> "Soul Guide for Suicidal Cats" published this year. In the <a href={`/${lang}/blog`} class="text-blue-600 hover:text-blue-800 underline">blog</a>, I share about my artistic work.</p>
+        </div>
+
+        <!-- External Links -->
+        <div class="flex flex-wrap gap-4 mt-8 justify-center">
+          <a 
+            href="https://www.artstherapieslibrary.com/search?term=%D7%A8%D7%95%D7%9F+%D7%92%D7%91%D7%A2" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-[#5B4D43] text-white rounded hover:bg-[#4a3d35] transition-colors"
+          >
+            Library →
+          </a>
+          <a 
+            href="https://bookscatharsis.com/product/%d7%9e%d6%b7%d7%9c%d7%95%d7%95%d7%94-%d7%a0%d7%a9%d7%9e%d7%95%d7%aa-%d7%9c%d7%97%d7%aa%d7%95%d7%9c%d7%99%d7%9d-%d7%90%d7%95%d7%91%d7%93%d7%a0%d7%99%d7%99%d7%9d/" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-[#5B4D43] text-white rounded hover:bg-[#4a3d35] transition-colors"
+          >
+            Catharsis →
+          </a>
+          <a 
+            href="https://www.hebpsy.net/showprofile.asp?id=54561" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-[#5B4D43] text-white rounded hover:bg-[#4a3d35] transition-colors"
+          >
+            Therapist Page →
+          </a>
+          <a 
+            href="https://www.yahat.org/therapists/info.aspx?id=5917" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-6 py-3 bg-[#5B4D43] text-white rounded hover:bg-[#4a3d35] transition-colors"
+          >
+            Therapist Page →
+          </a>
+        </div>
+      </div>
+    )}
+  </div>
+</BaseLayout>

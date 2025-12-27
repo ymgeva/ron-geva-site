@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Google Fonts - Alef (Hebrew) and Fahkwang */
+@import url('https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Fahkwang:wght@300;400;500;600;700&display=swap');
+
+/* RTL Support */
+[dir='rtl'] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir='ltr'] {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Base styles */
+body {
+  @apply font-alef;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  @apply font-fahkwang;
+}
+
+/* Ensure images are responsive */
+img {
+  @apply max-w-full h-auto;
+}

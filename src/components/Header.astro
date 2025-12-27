@@ -1,0 +1,72 @@
+---
+import { getLangFromUrl, useTranslatedPath } from '../utils/i18n';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const currentPath = Astro.url.pathname;
+
+// Helper to check if a path is active
+const isActive = (path: string) => {
+  const translatedPath = translatePath(path);
+  return currentPath === translatedPath || currentPath.startsWith(translatedPath + '/');
+};
+---
+
+<header class="bg-white border-b border-gray-200 shadow-sm">
+  <div class="container mx-auto px-4 py-6 max-w-7xl">
+    <!-- Logo and Title - Horizontal Layout -->
+    <div class="flex items-center justify-between gap-8 mb-6">
+      <!-- Logo (right side for Hebrew, left for English) -->
+      <a href={translatePath('/')} class={`block ${lang === 'he' ? 'order-2' : 'order-1'}`}>
+        <img src="/images/home-1.png" alt="Ron Geva Logo" class="w-32 h-32 object-cover rounded-lg hover:opacity-80 transition" />
+      </a>
+      
+      <!-- Name and Tagline (left side for Hebrew, right for English) -->
+      <div class={`${lang === 'he' ? 'order-1 text-right' : 'order-2 text-left'}`}>
+        <a href={translatePath('/')}>
+          <h1 class="text-4xl font-bold font-alef tracking-wider hover:text-gray-600 transition cursor-pointer">
+            {lang === 'he' ? 'רון גבע' : 'Ron Geva'}
+          </h1>
+        </a>
+        <p class="text-lg text-gray-600 font-alef tracking-wide mt-1">
+          {lang === 'he' ? 'אמנות מהסוג המרגש' : 'Art That Moves'}
+        </p>
+      </div>
+    </div>
+    
+    <!-- Navigation - Full Width -->
+    <nav class="border-t border-gray-200 pt-4">
+      <ul class="flex items-center justify-between gap-1 flex-wrap">
+        <li>
+          <a href={translatePath('/about')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/about') ? 'bg-gray-200 font-bold' : ''}`}>
+            {lang === 'he' ? 'אודות' : 'About'}
+          </a>
+        </li>
+        <li>
+          <a href={translatePath('/art')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/art') ? 'bg-gray-200 font-bold' : ''}`}>
+            {lang === 'he' ? 'אמנות' : 'Art'}
+          </a>
+        </li>
+        <li>
+          <a href={translatePath('/book')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/book') ? 'bg-gray-200 font-bold' : ''}`}>
+            {lang === 'he' ? 'ספר' : 'Book'}
+          </a>
+        </li>
+        <li>
+          <a href={translatePath('/blog')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/blog') ? 'bg-gray-200 font-bold' : ''}`}>
+            {lang === 'he' ? 'בלוג' : 'Blog'}
+          </a>
+        </li>
+        <li>
+          <a href={translatePath('/alligators')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/alligators') ? 'bg-gray-200 font-bold' : ''}`}>
+            {lang === 'he' ? 'תנינים' : 'Alligators'}
+          </a>
+        </li>
+        <li>
+          <LanguageSwitcher />
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

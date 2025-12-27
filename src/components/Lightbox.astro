@@ -1,0 +1,131 @@
+---
+// Lightbox component for fullscreen image viewing
+---
+
+<div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-4" role="dialog" aria-modal="true">
+  <button
+    id="lightbox-close"
+    class="absolute top-4 right-4 text-white text-4xl font-light hover:text-gray-300 transition z-10"
+    aria-label="Close"
+  >
+    ×
+  </button>
+  
+  <button
+    id="lightbox-prev"
+    class="absolute left-4 top-1/2 -translate-y-1/2 text-white text-5xl font-light hover:text-gray-300 transition hidden"
+    aria-label="Previous"
+  >
+    ‹
+  </button>
+  
+  <button
+    id="lightbox-next"
+    class="absolute right-4 top-1/2 -translate-y-1/2 text-white text-5xl font-light hover:text-gray-300 transition hidden"
+    aria-label="Next"
+  >
+    ›
+  </button>
+  
+  <div class="max-w-7xl max-h-full flex items-center justify-center">
+    <img
+      id="lightbox-image"
+      src=""
+      alt=""
+      class="max-w-full max-h-[90vh] object-contain"
+    />
+  </div>
+  
+  <div id="lightbox-caption" class="absolute bottom-4 left-0 right-0 text-center text-white text-lg px-4">
+  </div>
+</div>
+
+<script>
+  let currentImageIndex = 0;
+  let images: HTMLImageElement[] = [];
+  
+  function initLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    
+    // Get all gallery images
+    images = Array.from(document.querySelectorAll('.gallery-image')) as HTMLImageElement[];
+    
+    // Show/hide navigation buttons based on number of images
+    if (images.length > 1) {
+      prevBtn?.classList.remove('hidden');
+      nextBtn?.classList.remove('hidden');
+    }
+    
+    // Add click handlers to gallery images
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentImageIndex = index;
+        showImage(index);
+        lightbox?.classList.remove('hidden');
+        lightbox?.classList.add('flex');
+      });
+    });
+    
+    // Close lightbox
+    const closeLightbox = () => {
+      lightbox?.classList.add('hidden');
+      lightbox?.classList.remove('flex');
+    };
+    
+    closeBtn?.addEventListener('click', closeLightbox);
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        closeLightbox();
+      }
+    });
+    
+    // Navigation
+    const showImage = (index: number) => {
+      const img = images[index];
+      if (lightboxImage && img) {
+        lightboxImage.src = img.src;
+        lightboxImage.alt = img.alt;
+      }
+      if (lightboxCaption) {
+        lightboxCaption.textContent = img.alt || '';
+      }
+    };
+    
+    prevBtn?.addEventListener('click', () => {
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      showImage(currentImageIndex);
+    });
+    
+    nextBtn?.addEventListener('click', () => {
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      showImage(currentImageIndex);
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox?.classList.contains('hidden')) {
+        if (e.key === 'Escape') {
+          closeLightbox();
+        } else if (e.key === 'ArrowLeft' && images.length > 1) {
+          currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+          showImage(currentImageIndex);
+        } else if (e.key === 'ArrowRight' && images.length > 1) {
+          currentImageIndex = (currentImageIndex + 1) % images.length;
+          showImage(currentImageIndex);
+        }
+      }
+    });
+  }
+  
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLightbox);
+  } else {
+    initLightbox();
+  }
+</script>

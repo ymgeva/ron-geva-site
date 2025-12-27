@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../utils/i18n';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'he' } }];
+}
+
+const { lang } = Astro.params;
+
+const content = {
+  he: {
+    title: 'ספר',
+    pageTitle: 'מַלווה נשמות לחתולים אובדניים',
+    bookDetails: '״מַלווה נשמות לחתולים אובדניים״; שירים מאת רון גבע; עריכה: ילי שנר; עורך ראשי: יואב גלבוע; הוצאת קתרזיס; 50 עמודים',
+    digitalBook: 'ספר דיגיטלי',
+    printBook: 'ספר מודפס',
+    aboutTitle: 'על הספר',
+    aboutText: `"מַלווה נשמות לחתולים אובדניים" מציג נרטיב עמוק של מסע מייאוש לתקווה. בספר מתואר תהליך של צמיחה המתחיל במבט נוקב על מצב של חוסר אונים וקיפאון, ונע תוך חקירה מעצימה לחוזק פנימי ולהתחדשות. תנועה זו משקפת תהליך התפתחות אישי דרך כאב וייאוש להוויה של חוסן ותקווה, תהליך שבו השירים מתווים דרך לריפוי רגשי פסיכולוגי.
+
+הרקע המקצועי של גבע כמטפלת באומנות מעשיר את השירה שלה, ומעניק לה אותנטיות ודיוק. אוסף שירים זה מוצב כתרומה משמעותית לדיונים על בריאות הנפש והטיפול הנפשי, ופונה הן לחובבי ספרות והן לאנשי מקצוע בתחומי הפסיכולוגיה והטיפול.
+
+ב"מַלווה נשמות לחתולים אובדניים" שיריה של גבע מנווטים בתוך המורכבות של רגשות אנושיים, ומנסים להתחקות אחר דרך לקבלה ולחמלה. כל יצירה באוסף משקפת באופן כן ניואנסים של ייאוש ודקויות של החלמה, ומאתגרת את הקוראים לפגוש את המאבק הפנימי שלהם ואולי למצוא בספר נחמה. הלכה למעשה, שיריה מבטאים מסע אישי שהוא גם אוניברסלי.`,
+    reviewsTitle: 'ביקורות ומדיה',
+    reviewerName: 'עולם הספרים של שניר פלג',
+    reviewText: `אני לא תמיד יודע איזה ספר שירה לבחור לקרוא מתוך מה שמחכה לי. לפעמים זה משורר שאני מכיר, לפעמים כריכה מעניינת ולפעמים השם של הספר מגרה את המחשבות שלי. במקרה הזה השילוב של האיור בכריכה יחד עם השם המעניין והלא שגרתי גרם לי לתהות ולחקור את השירה שבתוכו.
+
+הכריכה מציגה בובת סמרטוטים הפוכה על הראש, מתבוננת מהקרקע אל החלל הריק שמעליה. מצד ימין חוט תלוי ועליו שק בד בצורת לב. קו הרישום פשוט, כמעט ילדותי, אבל משהו בו מייצר תחושת ניתוק כואבת. מי שמדפדף כבר מהכריכה אל תוך הדפים, יגלה שלא מדובר בתחושת ניכור בלבד אלא באוסף שירים של התמודדות נפשית, זיכרון גופני, אבל, תיקון, וגם הצצה זהירה החוצה מתוך חדר פנימי מאוד.
+
+השירים עצמם נעים כמו תהליך רגשי שלא ממהר לסגור קצוות. אין כאן שירה מתוחכמת או מנייריסטית. יש כאן ניסיון להישאר עם הכאב, לכתוב אותו מבפנים. רון גבע מצליחה לרשום את מה שקורה לא כשהיא מספרת סיפור, אלא כשהיא לוכדת רגעים מתוך תהליך פנימי ארוך, לפעמים מייסר, לפעמים מציל חיים. לא פעם יש תחושת מבוכה קלה למול הישירות הרגשית. אבל ככל שמתקדמים בתוך הספר, נבנית אמינות. נבנה אמון. יש כאן שיאים של חשיפה שיש בהם אומץ נדיר.
+
+אני לא מבקר שירה ולא מתיימר להיות. אני קורא חוויה. ומהחוויה שלי, מדובר בספר שירה שדורש כניסה שקטה והסכמה להישאר עם הלא פתור. לא כולם ירצו או יוכלו. אבל מי שייכנס, יפגוש יומן רגשי שקשה להתכחש לעוצמה שלו. כתיבה שמבקשת לא רק לעבד כאב אלא לאחוז רגעים של אמת. אולי גם להחזיק יד.`,
+    podcast1Title: 'פרק בפודקאסט "ברית מילה" ב"כאן הסכתים"',
+    podcast1Text: `רון גבע: "מלווה נשמות לחתולים אובדניים"
+שלומי חתוכה משוחח עם המשוררת רון גבע על המעבר מאמנות פלסטית לשירה, על היכולת להעמיד את עינויי הנפש בשורה ולתת להם שמות, ועל מילים שנולדו על ספת הפסיכולוגית.
+51 דקות | 31.07.24
+עורך: נדב הלפרין, מפיק: עמרי קפלן`,
+    podcast2Title: 'בתוכניתו של גואל פינטו "גם כן תרבות" ב"כאן תרבות"',
+  },
+  en: {
+    title: 'Book',
+    pageTitle: 'Soul Guide for Suicidal Cats',
+    bookDetails: '"Soul Guide for Suicidal Cats"; Poems by Ron Geva; Editor: Yeli Shner; Chief Editor: Yoav Galboa; Catharsis Publishing; 50 pages',
+    digitalBook: 'Digital Book',
+    printBook: 'Printed Book',
+    aboutTitle: 'About the Book',
+    aboutText: `"Soul Guide for Suicidal Cats" presents a profound narrative of a journey from despair to hope. The book describes a process of growth that begins with a piercing look at a state of helplessness and stagnation, and moves through an empowering exploration toward inner strength and renewal. This movement reflects a personal development process through pain and despair toward an existence of resilience and hope, a process in which the poems chart a path to emotional and psychological healing.
+
+Geva's professional background as an art therapist enriches her poetry, lending it authenticity and precision. This poetry collection is positioned as a significant contribution to discussions about mental health and psychological therapy, appealing both to literature enthusiasts and professionals in the fields of psychology and therapy.
+
+In "Soul Guide for Suicidal Cats," Geva's poems navigate the complexities of human emotions, attempting to trace a path to acceptance and compassion. Each work in the collection honestly reflects nuances of despair and subtleties of recovery, challenging readers to confront their own inner struggles and perhaps find solace in the book. In practice, her poems express a personal journey that is also universal.`,
+    reviewsTitle: 'Reviews and Media',
+    reviewerName: 'The Book World of Shnir Peleg',
+    reviewText: `I don't always know which poetry book to choose to read from what awaits me. Sometimes it's a poet I know, sometimes an interesting cover, and sometimes the book's title stimulates my thoughts. In this case, the combination of the cover illustration together with the interesting and unconventional title made me wonder and explore the poetry within.
+
+The cover presents a rag doll upside down, gazing from the ground to the empty space above. On the right side hangs a thread with a cloth bag in the shape of a heart. The line drawing is simple, almost childlike, but something about it creates a painful sense of disconnection. Anyone who leafs from the cover into the pages will discover that this is not just a sense of alienation, but a collection of poems about mental struggle, bodily memory, grief, repair, and also a cautious peek outward from a very internal room.
+
+The poems themselves move like an emotional process that doesn't rush to close loose ends. There's no sophisticated or mannerist poetry here. There's an attempt to stay with the pain, to write it from within. Ron Geva succeeds in recording what happens not when she tells a story, but when she captures moments from a long internal process, sometimes agonizing, sometimes life-saving. There's often a slight sense of confusion facing the emotional directness. But as you progress through the book, credibility builds. Trust builds. There are peaks of exposure that have rare courage.
+
+I'm not a poetry critic and don't claim to be. I'm reading an experience. And from my experience, this is a poetry book that demands quiet entry and agreement to stay with the unresolved. Not everyone will want to or be able to. But whoever enters will encounter an emotional diary whose power is hard to deny. Writing that seeks not only to process pain but to grasp moments of truth. Perhaps also to hold hands.`,
+    podcast1Title: 'Episode on the "Brit Mila" Podcast on "Kan Podcasts"',
+    podcast1Text: `Ron Geva: "Soul Guide for Suicidal Cats"
+Shlomi Hatouka converses with poet Ron Geva about the transition from plastic art to poetry, about the ability to line up the torments of the soul and give them names, and about words born on the psychologist's couch.
+51 minutes | July 31, 2024
+Editor: Nadav Halperin, Producer: Omri Kaplan`,
+    podcast2Title: 'On Goel Pinto\'s Show "Gam Ken Tarbut" on "Kan Culture"',
+  },
+};
+
+const t = content[lang];
+---
+
+<BaseLayout title={t.title} lang={lang}>
+  <div class="max-w-6xl mx-auto px-4 py-12 space-y-16">
+    <!-- Book Title -->
+    <h1 class="text-3xl md:text-4xl font-bold text-center mb-12">{t.pageTitle}</h1>
+
+    <!-- Book Covers and Purchase Section -->
+    <section class="grid md:grid-cols-2 gap-8 items-start">
+      <!-- Front Cover with Digital Purchase -->
+      <div class="flex flex-col items-center space-y-4">
+        <img 
+          src="/images/book-2.png" 
+          alt={t.pageTitle}
+          class="w-full max-w-sm shadow-lg"
+        />
+        <a 
+          href="https://www.e-vrit.co.il/Product/32298/מלווה_נשמות_לחתולים_אובדניים"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-[#5B4D43] text-white px-8 py-3 rounded hover:bg-[#4a3d35] transition-colors font-medium"
+        >
+          {t.digitalBook} ↑
+        </a>
+      </div>
+
+      <!-- Back Cover with Print Purchase -->
+      <div class="flex flex-col items-center space-y-4">
+        <img 
+          src="/images/book-3.jpg" 
+          alt={t.pageTitle + ' - back cover'}
+          class="w-full max-w-sm shadow-lg"
+        />
+        <a 
+          href="https://bit.ly/4bhufer"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-block bg-[#5B4D43] text-white px-8 py-3 rounded hover:bg-[#4a3d35] transition-colors font-medium"
+        >
+          {t.printBook} ↑
+        </a>
+      </div>
+    </section>
+
+    <!-- Book Details -->
+    <div class="text-center text-sm text-gray-700 max-w-3xl mx-auto">
+      {t.bookDetails}
+    </div>
+
+    <!-- Publisher Section -->
+    <div class="bg-gray-50 rounded-lg p-8 max-w-4xl mx-auto">
+      <div class="flex flex-col md:flex-row items-start gap-8">
+        <a 
+          href="https://bookscatharsis.com/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="flex-shrink-0"
+        >
+          <img 
+            src="/images/book-4.png" 
+            alt="Catharsis Publishing"
+            class="w-48 hover:opacity-80 transition-opacity"
+          />
+        </a>
+        <div class="flex-1 space-y-4">
+          <h2 class="text-2xl font-bold">{t.aboutTitle}</h2>
+          <div class="prose prose-lg max-w-none whitespace-pre-line text-justify">
+            {t.aboutText}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <hr class="border-gray-300 max-w-4xl mx-auto" />
+
+    <!-- Reviews and Media Section -->
+    <section class="space-y-12">
+      <h2 class="text-3xl font-bold text-center">{t.reviewsTitle}</h2>
+
+      <!-- Main Review with Puppet Image -->
+      <div class="bg-white rounded-lg p-8 max-w-4xl mx-auto shadow-md">
+        <div class="flex flex-col md:flex-row gap-8">
+          <a 
+            href="https://www.facebook.com/share/p/165e4YhoT9/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="flex-shrink-0 mx-auto"
+          >
+            <img 
+              src="/images/book-5.png" 
+              alt="Review"
+              class="w-64 hover:opacity-80 transition-opacity"
+            />
+          </a>
+          <div class="flex-1 space-y-4">
+            <h3 class="text-xl font-bold">
+              <a 
+                href="https://www.facebook.com/share/p/165e4YhoT9/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="underline hover:text-[#5B4D43]"
+              >
+                {t.reviewerName}
+              </a>
+            </h3>
+            <div class="prose max-w-none whitespace-pre-line text-justify">
+              {t.reviewText}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Quote Images -->
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <img src="/images/book-6.png" alt="Review quote" class="w-full shadow-sm" />
+        <img src="/images/book-7.png" alt="Review quote" class="w-full shadow-sm" />
+        <img src="/images/book-8.jpg" alt="Review quote" class="w-full shadow-sm" />
+        <img src="/images/book-9.png" alt="Review quote" class="w-full shadow-sm" />
+        <img src="/images/book-10.png" alt="Review quote" class="w-full shadow-sm" />
+      </div>
+
+      <!-- Podcast Interviews -->
+      <div class="space-y-8 max-w-4xl mx-auto">
+        <!-- Podcast 1 -->
+        <div class="bg-gray-50 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-4">{t.podcast1Title}</h3>
+          <div class="flex flex-col md:flex-row gap-6 items-center">
+            <a 
+              href="https://www.kan.org.il/content/kan/podcasts/p-8290/779163/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="flex-shrink-0"
+            >
+              <img 
+                src="/images/book-11.png" 
+                alt="Kan Radio Podcast"
+                class="w-full md:w-80 hover:opacity-80 transition-opacity"
+              />
+            </a>
+            <div class="whitespace-pre-line text-justify">
+              {t.podcast1Text}
+            </div>
+          </div>
+        </div>
+
+        <!-- Podcast 2 -->
+        <div class="bg-gray-50 rounded-lg p-6">
+          <h3 class="text-xl font-bold mb-4">{t.podcast2Title}</h3>
+          <div class="flex justify-center">
+            <a 
+              href="https://www.kan.org.il/content/kan/podcasts/p-8262/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <img 
+                src="/images/book-12.png" 
+                alt="Kan Culture"
+                class="w-64 hover:opacity-80 transition-opacity"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

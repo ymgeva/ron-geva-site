@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getLangFromUrl } from '../../utils/i18n';
+
+export async function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'he' } }];
+}
+
+const { lang } = Astro.params;
+
+const content = {
+  he: {
+    title: 'תנינים',
+    subtitle: '2025. מטר על מטר וחצי, עט על נייר.',
+    exhibitionTitle1: 'תערוכה במרכז האמנות הישראלי',
+    exhibitionTitle2: 'תערוכה "תקווה פורצת גבולות"',
+    exhibitionText: 'בחלל "בפנוכו", איתמר בן אב"י 9, ת"א. | 30.10.2025 - 4.12.2025',
+    exhibitionLink: 'https://did.li/G7JgT',
+  },
+  en: {
+    title: 'Alligators',
+    subtitle: '2025. 1 x 1.5 meters, pen on paper.',
+    exhibitionTitle1: 'Exhibition at Israeli Art Center',
+    exhibitionTitle2: 'Exhibition "Hope Breaks Boundaries"',
+    exhibitionText: 'At "Bifnoko" space, Itamar Ben Avi 9, Tel Aviv | October 30 - December 4, 2025',
+    exhibitionLink: 'https://did.li/G7JgT',
+  },
+};
+
+const t = content[lang];
+
+// Grid images: alligators-2.jpg through alligators-10.jpg (9 drawings)
+const gridImages = Array.from({ length: 9 }, (_, i) => `/images/alligators-${i + 2}.jpg`);
+---
+
+<BaseLayout title={t.title} lang={lang}>
+  <div class="max-w-7xl mx-auto px-4 py-12 space-y-12">
+    <!-- Title Section -->
+    <div class="text-center space-y-4 mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold">{t.title}</h1>
+      <p class="text-lg text-gray-700">{t.subtitle}</p>
+    </div>
+
+    <!-- Tight Grid - No gaps, looks like one big image -->
+    <div class="grid grid-cols-3 gap-0 max-w-5xl mx-auto" dir="ltr">
+      {gridImages.map((src, index) => (
+        <div class="aspect-[3/4] overflow-hidden">
+          <img
+            src={src}
+            alt={`${t.title} ${index + 1}`}
+            class="w-full h-full object-cover"
+            loading={index < 6 ? 'eager' : 'lazy'}
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Exhibition Photos Section -->
+    <div class="max-w-4xl mx-auto space-y-12 mt-16">
+      <!-- Exhibition Photo 1 -->
+      <div class="space-y-4">
+        <h2 class="text-2xl font-bold text-center">{t.exhibitionTitle1}</h2>
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <img
+            src="/images/alligators-11.jpg"
+            alt={t.exhibitionTitle1}
+            class="w-full h-auto"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Exhibition Photo 2 -->
+      <div class="space-y-4">
+        <h2 class="text-2xl font-bold text-center">{t.exhibitionTitle2}</h2>
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <a
+            href={t.exhibitionLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block hover:opacity-90 transition-opacity"
+          >
+            <img
+              src="/images/alligators-12.jpg"
+              alt={t.exhibitionTitle2}
+              class="w-full h-auto"
+              loading="lazy"
+            />
+          </a>
+        </div>
+        <p class="text-center text-gray-700 text-lg">
+          {t.exhibitionText}
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+import { getLangFromUrl, languages } from '../utils/i18n';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Ron Geva - Interdisciplinary Artist' } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const dir = lang === 'he' ? 'rtl' : 'ltr';
+---
+
+<!doctype html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'he' ? 'he_IL' : 'en_US'} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-gray-900">
+    <Header />
+    <main class="flex-1 container mx-auto px-4 py-8 max-w-7xl">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

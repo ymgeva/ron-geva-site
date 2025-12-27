@@ -1,0 +1,258 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Lightbox from '../../../components/Lightbox.astro';
+import { getLangFromUrl, useTranslations } from '../../../utils/i18n';
+
+export async function getStaticPaths() {
+  const blogPosts = await getCollection('blog');
+  
+  return blogPosts
+    .filter(post => !post.data.draft)
+    .flatMap((post) => {
+      // Strip language prefix from slug (e.g., "he/filename" -> "filename")
+      const cleanSlug = post.slug.replace(/^(he|en)\//, '');
+      return [
+        {
+          params: { lang: 'he', slug: cleanSlug },
+          props: { post },
+        },
+        {
+          params: { lang: 'en', slug: cleanSlug },
+          props: { post },
+        },
+      ];
+    });
+}
+
+type Props = {
+  post: CollectionEntry<'blog'>;
+};
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const isRTL = lang === 'he';
+
+// Format date for display
+const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'he' ? 'he-IL' : 'en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BaseLayout title={post.data.title}>
+  <article class={`max-w-4xl mx-auto px-4 py-8 ${isRTL ? 'rtl' : 'ltr'}`} dir={isRTL ? 'rtl' : 'ltr'}>
+    <!-- Back button -->
+    <a 
+      href={`/${lang}/blog`}
+      class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition-colors"
+    >
+      {isRTL ? '→' : '←'} {isRTL ? 'חזרה לבלוג' : 'Back to Blog'}
+    </a>
+
+    <!-- Header -->
+    <header class="mb-8">
+      <h1 class="text-4xl font-bold mb-4 font-alef">{post.data.title}</h1>
+      
+      <!-- Meta info -->
+      <div class="flex flex-wrap gap-4 text-gray-600 text-sm mb-4">
+        <span class="flex items-center gap-1">
+          <i class="far fa-calendar"></i>
+          {formattedDate}
+        </span>
+        <span class="flex items-center gap-1">
+          <i class="far fa-user"></i>
+          {post.data.author}
+        </span>
+        <span class="flex items-center gap-1">
+          <i class="far fa-clock"></i>
+          {post.data.readingTime}
+        </span>
+      </div>
+
+      <!-- Counters -->
+      <div class="flex gap-6 text-gray-500 text-sm pb-4 border-b border-gray-200">
+        <span class="flex items-center gap-1">
+          <i class="far fa-eye"></i>
+          {post.data.views} {isRTL ? 'צפיות' : 'views'}
+        </span>
+        <span class="flex items-center gap-1">
+          <i class="far fa-comment"></i>
+          {post.data.comments} {isRTL ? 'תגובות' : 'comments'}
+        </span>
+        <span class="flex items-center gap-1">
+          <i class="far fa-heart"></i>
+          {post.data.likes} {isRTL ? 'לייקים' : 'likes'}
+        </span>
+      </div>
+    </header>
+
+    <!-- Content -->
+    <div class="prose prose-lg max-w-none mb-8 font-alef">
+      {post.data.htmlContent ? (
+        <!-- Render HTML content if available -->
+        <div set:html={post.data.htmlContent} />
+      ) : (
+        <!-- Fallback to markdown -->
+        <Content />
+      )}
+    </div>
+
+    <!-- Comments Section -->
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h2 class="text-2xl font-bold mb-6 font-alef">{isRTL ? 'תגובות' : 'Comments'}</h2>
+      <div class="bg-gray-50 rounded-lg p-6 text-center text-gray-600">
+        <i class="far fa-comments text-4xl mb-4 block"></i>
+        <p>{isRTL ? 'מערכת תגובות תתווסף בקרוב' : 'Comments coming soon'}</p>
+      </div>
+    </div>
+  </article>
+
+  <Lightbox />
+
+  <style>
+    /* RTL support */
+    .rtl {
+      direction: rtl;
+      text-align: right;
+    }
+
+    .ltr {
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* Typography */
+    .prose {
+      font-family: 'Alef', sans-serif;
+    }
+
+    .prose :global(h1),
+    .prose :global(h2),
+    .prose :global(h3) {
+      font-family: 'Alef', sans-serif;
+      font-weight: 700;
+      margin-top: 1.5em;
+      margin-bottom: 0.75em;
+    }
+
+    .prose :global(h2) {
+      font-size: 1.5em;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 0.25em;
+    }
+
+    .prose :global(p) {
+      margin-bottom: 1.25em;
+      line-height: 1.8;
+    }
+
+    /* Image grids */
+    .prose :global(.image-grid) {
+      display: grid;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .prose :global(.grid-single) {
+      grid-template-columns: 1fr;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .prose :global(.grid-2-col) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prose :global(.grid-3-col) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .prose :global(.grid-2x2) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prose :global(.grid-3x2) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .prose :global(.image-grid img) {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.2s;
+      border-radius: 4px;
+    }
+
+    .prose :global(.image-grid img:hover) {
+      transform: scale(1.02);
+    }
+
+    /* Make images clickable for lightbox */
+    .prose :global(img) {
+      cursor: pointer;
+      max-width: 100%;
+      height: auto;
+      margin: 1.5rem auto;
+      display: block;
+      border-radius: 8px;
+    }
+
+    /* Style HTML content from Wix */
+    .prose :global(wow-image) {
+      display: block;
+      margin: 2rem 0;
+    }
+
+    .prose :global(wow-image img) {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* Remove Wix button overlays */
+    .prose :global(button) {
+      display: none;
+    }
+
+    /* Clean up Wix divs */
+    .prose :global(div) {
+      max-width: 100%;
+    }
+
+    /* Links */
+    .prose :global(a) {
+      color: #d0826e;
+      text-decoration: underline;
+    }
+
+    .prose :global(a:hover) {
+      color: #a66a53;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .prose :global(.grid-3-col),
+      .prose :global(.grid-3x2) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .prose :global(.grid-2-col),
+      .prose :global(.grid-2x2) {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    // Add gallery-image class to all images for lightbox
+    document.querySelectorAll('.prose img').forEach(img => {
+      img.classList.add('gallery-image');
+    });
+  </script>
+</BaseLayout>
