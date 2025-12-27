@@ -245,7 +245,7 @@ collections:
           name: "audioClips",
           widget: "list",
           required: false,
-          i18n: duplicate,
+          i18n: true,
           fields:
             [
               { label: "כותרת / Title", name: "title", widget: "string" },
