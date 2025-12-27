@@ -250,9 +250,14 @@ const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'he' ? 'he-I
   </style>
 
   <script>
-    // Add gallery-image class to all images for lightbox
-    document.querySelectorAll('.prose img').forEach(img => {
-      img.classList.add('gallery-image');
+    // Wait for DOM to be fully loaded before adding lightbox classes
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add gallery-image class to all images in blog content for lightbox
+      document.querySelectorAll('.prose img, .blog-content img').forEach(img => {
+        img.classList.add('gallery-image');
+        // Make images clickable
+        img.style.cursor = 'pointer';
+      });
     });
   </script>
 </BaseLayout>
