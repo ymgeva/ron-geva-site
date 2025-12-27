@@ -250,14 +250,11 @@ const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'he' ? 'he-I
   </style>
 
   <script>
-    // Wait for DOM to be fully loaded before adding lightbox classes
-    document.addEventListener('DOMContentLoaded', () => {
-      // Add gallery-image class to all images in blog content for lightbox
-      document.querySelectorAll('.prose img, .blog-content img').forEach(img => {
-        img.classList.add('gallery-image');
-        // Make images clickable
-        img.style.cursor = 'pointer';
-      });
+    // Add gallery-image class to images BEFORE Lightbox initializes
+    // This script runs inline, before the Lightbox component's DOMContentLoaded
+    document.querySelectorAll('.prose img, .blog-content img').forEach(img => {
+      img.classList.add('gallery-image');
+      img.style.cursor = 'pointer';
     });
   </script>
 </BaseLayout>
