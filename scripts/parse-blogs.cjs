@@ -150,38 +150,46 @@ files.forEach(file => {
   if (contentDiv) {
     // Clone the content div to manipulate it
     const contentClone = contentDiv.cloneNode(true);
+    const cloneDoc = contentClone.ownerDocument;
     
-    // Find all wow-image elements (Wix image containers)
-    const imageContainers = Array.from(contentClone.querySelectorAll('wow-image, [class*="image"]'));
+    // Simple approach: find all images and check if next siblings are also images
+    const allImages = Array.from(contentClone.querySelectorAll('img'));
+    const processedImages = new Set();
+    const imageGroups = [];
     
-    // Group sequential images together
-    let imageGroups = [];
-    let currentGroup = [];
-    
-    // Walk through all children to find image sequences
-    const allChildren = Array.from(contentClone.querySelectorAll('*'));
-    allChildren.forEach((el, idx) => {
-      const hasImage = el.querySelector('img') || el.tagName === 'IMG' || el.tagName === 'WOW-IMAGE';
+    allImages.forEach(img => {
+      if (processedImages.has(img)) return;
       
-      if (hasImage) {
-        // Extract the img element
-        const img = el.tagName === 'IMG' ? el : el.querySelector('img');
-        if (img) {
-          currentGroup.push(img);
+      const group = [img];
+      processedImages.add(img);
+      
+      // Get the container of this image (could be nested in divs)
+      let container = img.parentElement;
+      while (container && container !== contentClone && container.children.length === 1) {
+        container = container.parentElement;
+      }
+      
+      // Look for sequential sibling containers with images
+      if (container && container.parentElement) {
+        let nextSibling = container.nextElementSibling;
+        
+        while (nextSibling) {
+          const nextImg = nextSibling.querySelector('img');
+          if (nextImg && !processedImages.has(nextImg)) {
+            group.push(nextImg);
+            processedImages.add(nextImg);
+            nextSibling = nextSibling.nextElementSibling;
+          } else {
+            break;
+          }
         }
-      } else if (currentGroup.length > 0) {
-        // End of image sequence
-        if (currentGroup.length > 1) {
-          imageGroups.push([...currentGroup]);
-        }
-        currentGroup = [];
+      }
+      
+      // Only group if we have 2+ images
+      if (group.length > 1) {
+        imageGroups.push(group);
       }
     });
-    
-    // Add last group if exists
-    if (currentGroup.length > 1) {
-      imageGroups.push(currentGroup);
-    }
     
     // Wrap each image group in a grid div
     imageGroups.forEach(group => {
@@ -191,22 +199,31 @@ files.forEach(file => {
                        group.length === 6 ? 'grid-3x2' : 'grid-3-col';
       
       // Create wrapper div
-      const wrapper = doc.createElement('div');
+      const wrapper = cloneDoc.createElement('div');
       wrapper.className = `image-grid ${gridClass}`;
       
-      // Move first image's parent and insert wrapper before it
+      // Find a common parent and insert wrapper
       const firstImg = group[0];
-      const parent = firstImg.parentElement;
-      if (parent) {
-        parent.parentElement.insertBefore(wrapper, parent);
+      let firstContainer = firstImg.parentElement;
+      while (firstContainer && firstContainer !== contentClone && firstContainer.children.length === 1) {
+        firstContainer = firstContainer.parentElement;
+      }
+      
+      if (firstContainer && firstContainer.parentElement) {
+        firstContainer.parentElement.insertBefore(wrapper, firstContainer);
         
-        // Move all images to wrapper
+        // Move all images to wrapper and remove their containers
         group.forEach(img => {
-          const imgParent = img.parentElement;
+          let imgContainer = img.parentElement;
+          while (imgContainer && imgContainer !== contentClone && imgContainer.children.length === 1) {
+            imgContainer = imgContainer.parentElement;
+          }
+          
           wrapper.appendChild(img);
-          // Remove empty parent if needed
-          if (imgParent && imgParent.children.length === 0) {
-            imgParent.remove();
+          
+          // Remove the now-empty container
+          if (imgContainer && imgContainer.parentElement && imgContainer !== contentClone) {
+            imgContainer.parentElement.removeChild(imgContainer);
           }
         });
       }
