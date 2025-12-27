@@ -52,8 +52,8 @@
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
     
-    // Get all images from blog content - including those in htmlContent
-    images = Array.from(document.querySelectorAll('.prose img, .blog-content img')) as HTMLImageElement[];
+    // Get all images from blog content and galleries
+    images = Array.from(document.querySelectorAll('.prose img, .blog-content img, .gallery-image')) as HTMLImageElement[];
     
     // Show/hide navigation buttons based on number of images
     if (images.length > 1) {
