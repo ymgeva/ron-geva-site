@@ -91,7 +91,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'he' ? 'he-I
     </header>
 
     <!-- Content -->
-    <div class="prose prose-lg max-w-none mb-8 font-alef">
+    <div class="prose prose-lg max-w-none mb-8 font-alef blog-content">
       {post.data.htmlContent ? (
         <!-- Render HTML content if available -->
         <div set:html={post.data.htmlContent} />

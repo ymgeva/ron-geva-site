@@ -56,19 +56,21 @@ files.forEach(file => {
   const dateEl = doc.querySelector('[data-hook="time-ago"]');
   let pubDate = new Date().toISOString().split('T')[0];
   if (dateEl) {
-    const dateText = dateEl.getAttribute('title') || dateEl.textContent;
-    // Try to parse Hebrew date format
-    const match = dateText.match(/(\d+)\s+ב(\w+)/);
+    const dateText = dateEl.textContent || dateEl.getAttribute('title') || '';
+    // Parse Hebrew date format: "22 בפבר׳ 2024" or "3 במאי 2024"
+    // \u05d1 is ב, then capture Hebrew month name
+    const match = dateText.match(/(\d+)\s+\u05d1([\u05d0-\u05ea]+).*?(\d{4})/);
     if (match) {
       const day = match[1];
+      const year = match[3];
       const monthMap = {
-        'ינו': '01', 'פבר': '02', 'מרץ': '03', 'אפר': '04',
-        'מאי': '05', 'יונ': '06', 'יול': '07', 'אוג': '08',
-        'ספט': '09', 'אוק': '10', 'נוב': '11', 'דצמ': '12'
+        '\u05d9\u05e0\u05d5': '01', '\u05e4\u05d1\u05e8': '02', '\u05de\u05e8\u05e5': '03', '\u05d0\u05e4\u05e8': '04',
+        '\u05de\u05d0\u05d9': '05', '\u05d9\u05d5\u05e0': '06', '\u05d9\u05d5\u05dc': '07', '\u05d0\u05d5\u05d2': '08',
+        '\u05e1\u05e4\u05d8': '09', '\u05d0\u05d5\u05e7': '10', '\u05e0\u05d5\u05d1': '11', '\u05d3\u05e6\u05de': '12'
       };
       const monthKey = match[2].substring(0, 3);
       const month = monthMap[monthKey] || '01';
-      pubDate = `2024-${month}-${day.padStart(2, '0')}`;
+      pubDate = `${year}-${month}-${day.padStart(2, '0')}`;
     }
   }
   
@@ -229,10 +231,35 @@ files.forEach(file => {
       }
     });
     
+    // Build image map from meta.json for replacing Wix filenames
+    const imageMap = {};
+    if (meta.images) {
+      meta.images.forEach(img => {
+        // Extract Wix filename from URL (e.g., c16946_xxx~mv2.jpg)
+        const wixMatch = img.original.match(/\/(c16946_[^?\/]+)/);
+        if (wixMatch && img.local) {
+          imageMap[wixMatch[1]] = img.local;
+          // Also map base name without extension
+          const baseWixName = wixMatch[1].replace(/~mv2.*$/, '');
+          imageMap[baseWixName] = img.local;
+        }
+      });
+    }
+    
     htmlContent = contentClone.innerHTML
       // Fix image paths to use /images/ prefix
-      .replace(/src="([^"]*\/)?([^/"]+\.(jpg|jpeg|png|gif|webp))"/gi, (match, path, filename) => {
-        if (filename.startsWith('blog-') || filename.startsWith('c16946_')) {
+      .replace(/src="([^"]*\/)?([^\/"]+\.(jpg|jpeg|png|gif|webp))"/gi, (match, path, filename) => {
+        // Check if it's a Wix c16946 filename
+        if (filename.includes('c16946_')) {
+          // Try to find mapping in meta.json
+          const baseName = filename.replace(/~mv2.*$/, '').split('.')[0];
+          const localFile = imageMap[filename] || imageMap[baseName + '.jpg'] || imageMap[baseName + '.webp'] || imageMap[baseName + '.png'];
+          if (localFile) {
+            return `src="/images/${localFile}"`;
+          }
+        }
+        // Already has blog- prefix
+        if (filename.startsWith('blog-')) {
           return `src="/images/${filename}"`;
         }
         return match;

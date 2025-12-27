@@ -110,13 +110,59 @@ collections:
           i18n: duplicate,
         }
       - {
+          label: "זמן קריאה / Reading Time",
+          name: "readingTime",
+          widget: "string",
+          required: false,
+          i18n: true,
+        }
+      - {
+          label: "צפיות / Views",
+          name: "views",
+          widget: "number",
+          default: 0,
+          required: false,
+          i18n: duplicate,
+        }
+      - {
+          label: "תגובות / Comments",
+          name: "comments",
+          widget: "number",
+          default: 0,
+          required: false,
+          i18n: duplicate,
+        }
+      - {
+          label: "לייקים / Likes",
+          name: "likes",
+          widget: "number",
+          default: 0,
+          required: false,
+          i18n: duplicate,
+        }
+      - {
           label: "טיוטה / Draft",
           name: "draft",
           widget: "boolean",
           default: false,
           i18n: duplicate,
         }
-      - { label: "תוכן / Body", name: "body", widget: "markdown", i18n: true }
+      - { 
+          label: "תוכן HTML / HTML Content", 
+          name: "htmlContent", 
+          widget: "text",
+          required: false,
+          i18n: true,
+          hint: "תוכן מלא בפורמט HTML (אופציונלי) / Full HTML content (optional)"
+        }
+      - { 
+          label: "תוכן Markdown / Markdown Body", 
+          name: "body", 
+          widget: "markdown", 
+          required: false,
+          i18n: true,
+          hint: "השתמש ב-Markdown לפוסטים חדשים או ב-HTML למעלה לפוסטים קיימים / Use Markdown for new posts or HTML field above for existing posts"
+        }
 
   # Pages Collection
   - name: "pages"
