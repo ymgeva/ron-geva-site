@@ -57,20 +57,30 @@ files.forEach(file => {
   let pubDate = new Date().toISOString().split('T')[0];
   if (dateEl) {
     const dateText = dateEl.textContent || dateEl.getAttribute('title') || '';
-    // Parse Hebrew date format: "22 בפבר׳ 2024" or "3 במאי 2024"
-    // \u05d1 is ב, then capture Hebrew month name
-    const match = dateText.match(/(\d+)\s+\u05d1([\u05d0-\u05ea]+).*?(\d{4})/);
+    const monthMap = {
+      '\u05d9\u05e0\u05d5': '01', '\u05e4\u05d1\u05e8': '02', '\u05de\u05e8\u05e5': '03', '\u05d0\u05e4\u05e8': '04',
+      '\u05de\u05d0\u05d9': '05', '\u05d9\u05d5\u05e0': '06', '\u05d9\u05d5\u05dc': '07', '\u05d0\u05d5\u05d2': '08',
+      '\u05e1\u05e4\u05d8': '09', '\u05d0\u05d5\u05e7': '10', '\u05e0\u05d5\u05d1': '11', '\u05d3\u05e6\u05de': '12'
+    };
+    
+    // Try to match date with year: "22 בפבר׳ 2024"
+    let match = dateText.match(/(\d+)\s+\u05d1([\u05d0-\u05ea]+).*?(\d{4})/);
     if (match) {
       const day = match[1];
       const year = match[3];
-      const monthMap = {
-        '\u05d9\u05e0\u05d5': '01', '\u05e4\u05d1\u05e8': '02', '\u05de\u05e8\u05e5': '03', '\u05d0\u05e4\u05e8': '04',
-        '\u05de\u05d0\u05d9': '05', '\u05d9\u05d5\u05e0': '06', '\u05d9\u05d5\u05dc': '07', '\u05d0\u05d5\u05d2': '08',
-        '\u05e1\u05e4\u05d8': '09', '\u05d0\u05d5\u05e7': '10', '\u05e0\u05d5\u05d1': '11', '\u05d3\u05e6\u05de': '12'
-      };
       const monthKey = match[2].substring(0, 3);
       const month = monthMap[monthKey] || '01';
       pubDate = `${year}-${month}-${day.padStart(2, '0')}`;
+    } else {
+      // Try date without year: "7 בספט׳" - use meta.json scrapedAt for year
+      match = dateText.match(/(\d+)\s+\u05d1([\u05d0-\u05ea]+)/);
+      if (match && meta.scrapedAt) {
+        const day = match[1];
+        const year = new Date(meta.scrapedAt).getFullYear();
+        const monthKey = match[2].substring(0, 3);
+        const month = monthMap[monthKey] || '01';
+        pubDate = `${year}-${month}-${day.padStart(2, '0')}`;
+      }
     }
   }
   
@@ -247,19 +257,23 @@ files.forEach(file => {
     }
     
     htmlContent = contentClone.innerHTML
-      // Fix image paths to use /images/ prefix
-      .replace(/src="([^"]*\/)?([^\/"]+\.(jpg|jpeg|png|gif|webp))"/gi, (match, path, filename) => {
-        // Check if it's a Wix c16946 filename
-        if (filename.includes('c16946_')) {
-          // Try to find mapping in meta.json
-          const baseName = filename.replace(/~mv2.*$/, '').split('.')[0];
-          const localFile = imageMap[filename] || imageMap[baseName + '.jpg'] || imageMap[baseName + '.webp'] || imageMap[baseName + '.png'];
-          if (localFile) {
-            return `src="/images/${localFile}"`;
-          }
+      // Replace Wix CDN URLs in src attribute with local image paths
+      .replace(/src="https:\/\/static\.wixstatic\.com\/media\/(c16946_[^"\/]+?)(?:\/[^"]+)?"/gi, (match, wixFilename) => {
+        // Extract base filename without ~mv2 suffix
+        const baseName = wixFilename.replace(/~mv2.*$/, '').split('.')[0];
+        // Try to find mapping in meta.json
+        const localFile = imageMap[wixFilename] || imageMap[baseName + '.jpg'] || imageMap[baseName + '.webp'] || imageMap[baseName + '.png'];
+        if (localFile) {
+          return `src="/images/${localFile}"`;
         }
-        // Already has blog- prefix
-        if (filename.startsWith('blog-')) {
+        // Fallback - keep original if no mapping found
+        return match;
+      })
+      // Remove srcset attributes completely since they have Wix CDN URLs with transformations
+      .replace(/\s+srcset="[^"]*"/gi, '')
+      // Also fix any remaining relative paths with blog- prefix
+      .replace(/src="([^"]*\/)?([^\/"]+\.(jpg|jpeg|png|gif|webp))"/gi, (match, path, filename) => {
+        if (filename.startsWith('blog-') && !match.includes('/images/')) {
           return `src="/images/${filename}"`;
         }
         return match;
