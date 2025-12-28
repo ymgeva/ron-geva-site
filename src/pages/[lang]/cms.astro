@@ -1,5 +1,11 @@
 ---
 // Decap CMS admin interface - directly embedded
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'he' } }
+  ];
+}
 ---
 <!doctype html>
 <html>
