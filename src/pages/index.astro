@@ -2,13 +2,42 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=/he">
-    <script>
-      window.location.href = '/he';
-    </script>
-    <title>Redirecting...</title>
+    <title>Ron Geva</title>
+    <!-- Netlify Identity Widget -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
-    <p>Redirecting to <a href="/he">/he</a>...</p>
+    <script>
+      // Check if there's an authentication token in the URL hash
+      const hash = window.location.hash;
+      const hasAuthToken = hash.includes('invite_token=') || 
+                           hash.includes('confirmation_token=') || 
+                           hash.includes('recovery_token=') ||
+                           hash.includes('access_token=');
+      
+      if (hasAuthToken) {
+        // Wait for Identity widget to initialize and handle the token
+        if (window.netlifyIdentity) {
+          window.netlifyIdentity.on("init", user => {
+            // After authentication completes, redirect to CMS
+            if (user) {
+              window.location.href = '/he/cms';
+            }
+          });
+          
+          window.netlifyIdentity.on("login", () => {
+            window.location.href = '/he/cms';
+          });
+          
+          window.netlifyIdentity.on("close", () => {
+            // If they close the modal, redirect to home
+            window.location.href = '/he';
+          });
+        }
+      } else {
+        // No auth token, redirect immediately to Hebrew home
+        window.location.href = '/he';
+      }
+    </script>
   </body>
 </html>
