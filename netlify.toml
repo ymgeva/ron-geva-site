@@ -7,11 +7,6 @@
   to = "/he/cms"
   status = 301
 
-[[redirects]]
-  from = "/"
-  to = "/he"
-  status = 301
-
 # Netlify CMS / Decap CMS
 [[headers]]
   for = "/admin/*"

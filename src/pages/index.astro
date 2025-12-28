@@ -1,4 +1,14 @@
----
-// Redirect root to /he by default (Hebrew)
-return Astro.redirect('/he');
----
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=/he">
+    <script>
+      window.location.href = '/he';
+    </script>
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <p>Redirecting to <a href="/he">/he</a>...</p>
+  </body>
+</html>

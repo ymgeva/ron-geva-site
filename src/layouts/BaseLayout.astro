@@ -32,6 +32,9 @@ const dir = lang === 'he' ? 'rtl' : 'ltr';
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={lang === 'he' ? 'he_IL' : 'en_US'} />
+    
+    <!-- Netlify Identity Widget for CMS authentication -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body class="min-h-screen flex flex-col bg-white text-gray-900">
     <Header />
@@ -39,5 +42,18 @@ const dir = lang === 'he' ? 'rtl' : 'ltr';
       <slot />
     </main>
     <Footer />
+    
+    <script is:inline>
+      // Handle Netlify Identity authentication events
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/he/cms";
+            });
+          }
+        });
+      }
+    </script>
   </body>
 </html>
