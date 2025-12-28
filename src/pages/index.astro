@@ -7,6 +7,7 @@
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   </head>
   <body>
+    <p style="text-align: center; padding-top: 50px;">Loading...</p>
     <script>
       // Check if there's an authentication token in the URL hash
       const hash = window.location.hash;
@@ -16,11 +17,14 @@
                            hash.includes('access_token=');
       
       if (hasAuthToken) {
-        // Wait for Identity widget to initialize and handle the token
+        // Wait for Identity widget to initialize
         if (window.netlifyIdentity) {
           window.netlifyIdentity.on("init", user => {
-            // After authentication completes, redirect to CMS
-            if (user) {
+            if (!user) {
+              // Open the widget to handle the token
+              window.netlifyIdentity.open();
+            } else {
+              // Already logged in, go to CMS
               window.location.href = '/he/cms';
             }
           });
@@ -32,6 +36,12 @@
           window.netlifyIdentity.on("close", () => {
             // If they close the modal, redirect to home
             window.location.href = '/he';
+          });
+          
+          window.netlifyIdentity.on("error", (err) => {
+            console.error("Identity error:", err);
+            // On error, redirect to home after 2 seconds
+            setTimeout(() => window.location.href = '/he', 2000);
           });
         }
       } else {
