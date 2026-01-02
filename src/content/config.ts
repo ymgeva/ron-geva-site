@@ -34,14 +34,16 @@ const artworks = defineCollection({
 });
 
 const artCategories = defineCollection({
-  type: 'content',
+  type: 'data',
   schema: z.object({
-    title: z.string(),
     slug: z.string(),
-    image: z.string(),
-    count: z.number(),
-    order: z.number().default(0),
-    description: z.string().optional(),
+    title: z.object({
+      he: z.string(),
+      en: z.string(),
+    }),
+    thumbnail: z.string(),
+    imageCount: z.number(),
+    order: z.number(),
   }),
 });
 

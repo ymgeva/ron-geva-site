@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { useTranslatedPath } from '../../../utils/i18n';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   return [{ params: { lang: 'en' } }, { params: { lang: 'he' } }];
@@ -9,87 +10,11 @@ export async function getStaticPaths() {
 const { lang } = Astro.params;
 const translatePath = useTranslatedPath(lang as any);
 
-const categories = {
-  he: [
-    {
-      slug: 'color',
-      title: 'צבע',
-      image: '/images/art-color-thumb.png',
-      count: 66,
-    },
-    {
-      slug: 'bw',
-      title: 'שחור לבן',
-      image: '/images/art-bw-thumb.png',
-      count: 61,
-    },
-    {
-      slug: 'sculptures',
-      title: 'פסלים',
-      image: '/images/art-sculptures-thumb.png',
-      count: 50,
-    },
-    {
-      slug: 'portraits',
-      title: 'דיוקנאות בהזמנה',
-      image: '/images/art-portraits-thumb.png',
-      count: 40,
-    },
-    {
-      slug: 'postcards',
-      title: 'גלויות ועוד',
-      image: '/images/art-postcards-thumb.png',
-      count: 13,
-    },
-    {
-      slug: 'alligators',
-      title: 'תנינים',
-      image: '/images/alligators-thumb.jpg',
-      count: 10,
-    },
-  ],
-  en: [
-    {
-      slug: 'color',
-      title: 'Color',
-      image: '/images/art-color-thumb.png',
-      count: 66,
-    },
-    {
-      slug: 'bw',
-      title: 'Black & White',
-      image: '/images/art-bw-thumb.png',
-      count: 61,
-    },
-    {
-      slug: 'sculptures',
-      title: 'Sculptures',
-      image: '/images/art-sculptures-thumb.png',
-      count: 50,
-    },
-    {
-      slug: 'portraits',
-      title: 'Commissioned Portraits',
-      image: '/images/art-portraits-thumb.png',
-      count: 40,
-    },
-    {
-      slug: 'postcards',
-      title: 'Postcards & More',
-      image: '/images/art-postcards-thumb.png',
-      count: 13,
-    },
-    {
-      slug: 'alligators',
-      title: 'Alligators',
-      image: '/images/alligators-thumb.jpg',
-      count: 10,
-    },
-  ],
-};
+// Load categories from content collection
+const allCategories = await getCollection('art-categories');
+const sortedCategories = allCategories.sort((a, b) => a.data.order - b.data.order);
 
 const pageTitle = lang === 'he' ? 'אומנות' : 'Art';
-const currentCategories = categories[lang as keyof typeof categories] || categories.en;
 ---
 
 <BaseLayout title={pageTitle}>
@@ -97,19 +22,19 @@ const currentCategories = categories[lang as keyof typeof categories] || categor
     <h1 class="text-4xl mb-12 text-center">{pageTitle}</h1>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-      {currentCategories.map((category) => (
+      {sortedCategories.map((category) => (
         <a
-          href={translatePath(`/art/${category.slug}`)}
+          href={translatePath(`/art/${category.data.slug}`)}
           class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
         >
           <div class="aspect-[16/9]">
             <img
-              src={category.image}
-              alt={category.title}
+              src={category.data.thumbnail}
+              alt={category.data.title[lang as 'he' | 'en']}
               class="w-full h-full object-cover"
             />
             <div class="absolute top-0 {lang === 'he' ? 'right-0' : 'left-0'} text-white px-6" style="background-color: rgba(128, 126, 125, 0.8); height: 33pt; display: flex; align-items: center;">
-              <span style={`font-size: 18pt; font-family: ${lang === 'he' ? 'Alef' : 'Source Sans 3'}, sans-serif;`}>{category.title}</span>
+              <span style={`font-size: 18pt; font-family: ${lang === 'he' ? 'Alef' : 'Source Sans 3'}, sans-serif;`}>{category.data.title[lang as 'he' | 'en']}</span>
             </div>
           </div>
         </a>

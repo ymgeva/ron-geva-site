@@ -1,0 +1,10 @@
+{
+  "slug": "postcards",
+  "title": {
+    "he": "גלויות",
+    "en": "Postcards"
+  },
+  "thumbnail": "/images/art/thumbnails/postcards.png",
+  "imageCount": 19,
+  "order": 5
+}

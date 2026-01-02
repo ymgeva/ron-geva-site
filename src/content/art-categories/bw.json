@@ -1,0 +1,10 @@
+{
+  "slug": "bw",
+  "title": {
+    "he": "שחור לבן",
+    "en": "Black & White"
+  },
+  "thumbnail": "/images/art/thumbnails/bw.png",
+  "imageCount": 30,
+  "order": 2
+}

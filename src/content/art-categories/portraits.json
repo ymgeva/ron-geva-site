@@ -1,0 +1,10 @@
+{
+  "slug": "portraits",
+  "title": {
+    "he": "דיוקנאות",
+    "en": "Portraits"
+  },
+  "thumbnail": "/images/art/thumbnails/portraits.png",
+  "imageCount": 13,
+  "order": 4
+}

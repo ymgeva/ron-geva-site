@@ -1,16 +1,19 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Lightbox from '../../../components/Lightbox.astro';
+import { getCollection, getEntry } from 'astro:content';
+import fs from 'fs';
+import path from 'path';
 
 export async function getStaticPaths() {
-  const categories = ['color', 'portraits', 'bw', 'sculptures', 'postcards', 'alligators'];
+  const categories = await getCollection('art-categories');
   const locales = ['en', 'he'];
   
   const paths = [];
   for (const lang of locales) {
     for (const category of categories) {
       paths.push({
-        params: { lang, category },
+        params: { lang, category: category.data.slug },
       });
     }
   }
@@ -25,28 +28,33 @@ if (category === 'alligators') {
   return Astro.redirect(`/${lang}/alligators`);
 }
 
-// Category metadata with image counts (after removing social icons)
-const categoryData = {
-  color: { he: 'צבע', en: 'Color', count: 66 },
-  bw: { he: 'שחור לבן', en: 'Black & White', count: 61 },
-  sculptures: { he: 'פסלים', en: 'Sculptures', count: 50 },
-  portraits: { he: 'דיוקנאות בהזמנה', en: 'Commissioned Portraits', count: 40 },
-  postcards: { he: 'גלויות ועוד', en: 'Postcards & More', count: 13 },
-};
+// Load category metadata from content collection
+const categoryEntry = await getEntry('art-categories', category as string);
+if (!categoryEntry) {
+  return Astro.redirect(`/${lang}/art`);
+}
 
-const currentCategory = categoryData[category as keyof typeof categoryData];
-const title = currentCategory[lang as keyof typeof currentCategory] as string;
+const title = categoryEntry.data.title[lang as 'he' | 'en'];
 
-// Generate array of image paths for this category
-// Images start from index 2 (index 1 is the logo/nav image)
-const imageCount = currentCategory.count;
-const images = Array.from({ length: imageCount - 1 }, (_, i) => {
-  const index = i + 2;
-  return {
-    src: `/images/art-${category}-${index}.jpg`,
-    alt: `${title} ${i + 1}`,
-  };
-});
+// Get list of images from the public/images/art/{category} directory
+const imagesDir = path.join(process.cwd(), 'public', 'images', 'art', category as string);
+let imageFiles: string[] = [];
+try {
+  imageFiles = fs.readdirSync(imagesDir)
+    .filter(file => /\.(jpg|jpeg|png)$/i.test(file))
+    .sort((a, b) => {
+      const numA = parseInt(a.match(/\d+/)?.[0] || '0');
+      const numB = parseInt(b.match(/\d+/)?.[0] || '0');
+      return numA - numB;
+    });
+} catch (err) {
+  console.error(`Failed to read images directory: ${imagesDir}`, err);
+}
+
+const images = imageFiles.map((file, i) => ({
+  src: `/images/art/${category}/${file}`,
+  alt: `${title} ${i + 1}`,
+}));
 ---
 
 <BaseLayout title={title}>

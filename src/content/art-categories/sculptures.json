@@ -1,0 +1,10 @@
+{
+  "slug": "sculptures",
+  "title": {
+    "he": "פסלים",
+    "en": "Sculptures"
+  },
+  "thumbnail": "/images/art/thumbnails/sculptures.png",
+  "imageCount": 31,
+  "order": 3
+}

@@ -5,6 +5,12 @@ backend:
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
 
+# Media library configuration for organized uploads
+media_library:
+  name: uploadcare
+  config:
+    publicKey: "demopublickey"
+
 locale: he
 i18n:
   structure: multiple_folders
@@ -271,3 +277,101 @@ collections:
             ],
         }
       - { label: "תוכן מלא / Full Content", name: "body", widget: "markdown", i18n: true }
+
+  # Art Categories Collection
+  - name: "art-categories"
+    label: "קטגוריות אמנות / Art Categories"
+    folder: "src/content/art-categories"
+    extension: "json"
+    format: "json"
+    create: false
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Slug", name: "slug", widget: "string" }
+      - label: "כותרת / Title"
+        name: "title"
+        widget: "object"
+        fields:
+          - { label: "עברית / Hebrew", name: "he", widget: "string" }
+          - { label: "אנגלית / English", name: "en", widget: "string" }
+      - { label: "תמונת תצוגה / Thumbnail", name: "thumbnail", widget: "image" }
+      - { label: "מספר תמונות / Image Count", name: "imageCount", widget: "number" }
+      - { label: "סדר תצוגה / Display Order", name: "order", widget: "number" }
+
+  # Art Images by Category
+  - name: "art-images-color"
+    label: "תמונות צבע / Color Images"
+    folder: "public/images/art/color"
+    create: true
+    media_folder: ""
+    public_folder: "/images/art/color"
+    extension: "jpg"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/color", public_folder: "/images/art/color" }
+      - { label: "כותרת / Title", name: "title", widget: "string", required: false }
+
+  - name: "art-images-bw"
+    label: "תמונות שחור לבן / B&W Images"
+    folder: "public/images/art/bw"
+    create: true
+    media_folder: ""
+    public_folder: "/images/art/bw"
+    extension: "jpg"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/bw", public_folder: "/images/art/bw" }
+      - { label: "כותרת / Title", name: "title", widget: "string", required: false }
+
+  - name: "art-images-sculptures"
+    label: "תמונות פסלים / Sculpture Images"
+    folder: "public/images/art/sculptures"
+    create: true
+    media_folder: ""
+    public_folder: "/images/art/sculptures"
+    extension: "jpg"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/sculptures", public_folder: "/images/art/sculptures" }
+      - { label: "כותרת / Title", name: "title", widget: "string", required: false }
+
+  - name: "art-images-portraits"
+    label: "תמונות דיוקנאות / Portrait Images"
+    folder: "public/images/art/portraits"
+    create: true
+    media_folder: ""
+    public_folder: "/images/art/portraits"
+    extension: "jpg"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/portraits", public_folder: "/images/art/portraits" }
+      - { label: "כותרת / Title", name: "title", widget: "string", required: false }
+
+  - name: "art-images-postcards"
+    label: "תמונות גלויות / Postcard Images"
+    folder: "public/images/art/postcards"
+    create: true
+    media_folder: ""
+    public_folder: "/images/art/postcards"
+    extension: "jpg"
+    format: "frontmatter"
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/postcards", public_folder: "/images/art/postcards" }
+      - { label: "כותרת / Title", name: "title", widget: "string", required: false }

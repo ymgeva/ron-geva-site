@@ -1,0 +1,10 @@
+{
+  "slug": "color",
+  "title": {
+    "he": "צבע",
+    "en": "Color"
+  },
+  "thumbnail": "/images/art/thumbnails/color.png",
+  "imageCount": 32,
+  "order": 1
+}
