@@ -4,23 +4,43 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getLangFromUrl, useTranslations } from '../../../utils/i18n';
 
 export async function getStaticPaths() {
-  const blogPosts = (await getCollection('blog'))
-    .filter(post => !post.data.draft)
+  // Get all blog posts from both languages
+  const hebrewPosts = (await getCollection('blog'))
+    .filter(post => post.id.startsWith('he/') && !post.data.draft)
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  
+  const englishPosts = (await getCollection('blog'))
+    .filter(post => post.id.startsWith('en/') && !post.data.draft)
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+  // Create a map of English posts by slug for quick lookup
+  const englishPostMap = new Map(
+    englishPosts.map(post => [post.slug, post])
+  );
+
+  // For each Hebrew post, check if there's an English translation
+  const postsWithTranslations = hebrewPosts.map(hePost => {
+    const enPost = englishPostMap.get(hePost.slug);
+    return {
+      he: hePost,
+      en: enPost,
+      slug: hePost.slug,
+    };
+  });
 
   return [
     {
       params: { lang: 'he' },
-      props: { blogPosts },
+      props: { postsWithTranslations },
     },
     {
       params: { lang: 'en' },
-      props: { blogPosts },
+      props: { postsWithTranslations },
     },
   ];
 }
 
-const { blogPosts } = Astro.props;
+const { postsWithTranslations } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const isRTL = lang === 'he';
@@ -38,14 +58,17 @@ const isRTL = lang === 'he';
 
     <!-- Blog grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      {blogPosts.map((post) => {
+      {postsWithTranslations.map(({ he, en, slug }) => {
+        // Use English post if available and user is viewing English site, otherwise use Hebrew
+        const post = (lang === 'en' && en) ? en : he;
+        
         const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'he' ? 'he-IL' : 'en-US', {
           year: 'numeric',
           month: 'long',
           day: 'numeric'
         });
         // Strip language prefix from slug (e.g., "he/filename" -> "filename")
-        const cleanSlug = post.slug.replace(/^(he|en)\//,  '');
+        const cleanSlug = slug.replace(/^(he|en)\//, '');
 
         return (
           <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300">

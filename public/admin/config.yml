@@ -18,109 +18,42 @@ i18n:
   default_locale: en
 
 collections:
-  # Artworks Collection
-  - name: "artworks"
-    label: "יצירות אמנות / Artworks"
-    folder: "src/content/artworks"
+  # Blog Collection - Hebrew
+  - name: "blog-he"
+    label: "בלוג עברית / Hebrew Blog"
+    folder: "src/content/blog/he"
     create: true
-    i18n: true
-    slug: "{{category}}-{{slug}}"
-    fields:
-      - { label: "כותרת / Title", name: "title", widget: "string", i18n: true }
-      - {
-          label: "קטגוריה / Category",
-          name: "category",
-          widget: "select",
-          options:
-            [
-              { label: "צבעוני / Color", value: "color" },
-              { label: "דיוקנאות / Portraits", value: "portraits" },
-              { label: "שחור לבן / Black & White", value: "bw" },
-              { label: "פסלים / Sculptures", value: "sculptures" },
-              { label: "גלויות / Postcards", value: "postcards" },
-            ],
-          i18n: duplicate,
-        }
-      - { label: "תמונה / Image", name: "image", widget: "image", i18n: duplicate }
-      - {
-          label: "שנה / Year",
-          name: "year",
-          widget: "number",
-          required: false,
-          i18n: duplicate,
-        }
-      - {
-          label: "טכניקה / Medium",
-          name: "medium",
-          widget: "string",
-          required: false,
-          i18n: true,
-        }
-      - {
-          label: "מידות / Dimensions",
-          name: "dimensions",
-          widget: "string",
-          required: false,
-          i18n: true,
-        }
-      - {
-          label: "תיאור / Description",
-          name: "description",
-          widget: "text",
-          required: false,
-          i18n: true,
-        }
-      - {
-          label: "סדר תצוגה / Display Order",
-          name: "order",
-          widget: "number",
-          required: false,
-          i18n: duplicate,
-        }
-      - { label: "Body", name: "body", widget: "markdown", required: false, i18n: true }
-
-  # Blog Collection
-  - name: "blog"
-    label: "בלוג / Blog"
-    folder: "src/content/blog"
-    create: true
-    i18n: true
     slug: "{{slug}}"
     fields:
-      - { label: "כותרת / Title", name: "title", widget: "string", i18n: true }
+      - { label: "כותרת / Title", name: "title", widget: "string" }
       - {
           label: "תאריך פרסום / Publish Date",
           name: "pubDate",
           widget: "datetime",
-          i18n: duplicate,
         }
       - {
           label: "תיאור / Description",
           name: "description",
           widget: "text",
           required: false,
-          i18n: true,
         }
       - {
           label: "תמונה ראשית / Featured Image",
           name: "featuredImage",
           widget: "image",
           required: false,
-          i18n: duplicate,
         }
       - {
           label: "מחבר / Author",
           name: "author",
           widget: "string",
           default: "Ron Geva",
-          i18n: duplicate,
         }
       - {
           label: "זמן קריאה / Reading Time",
           name: "readingTime",
           widget: "string",
           required: false,
-          i18n: true,
         }
       - {
           label: "צפיות / Views",
@@ -128,7 +61,6 @@ collections:
           widget: "number",
           default: 0,
           required: false,
-          i18n: duplicate,
         }
       - {
           label: "תגובות / Comments",
@@ -136,7 +68,6 @@ collections:
           widget: "number",
           default: 0,
           required: false,
-          i18n: duplicate,
         }
       - {
           label: "לייקים / Likes",
@@ -144,21 +75,26 @@ collections:
           widget: "number",
           default: 0,
           required: false,
-          i18n: duplicate,
+        }
+      - {
+          label: "פריסת תמונות / Image Layout",
+          name: "imageLayout",
+          widget: "select",
+          required: false,
+          options: ["2-col", "3-col"],
+          default: "3-col",
         }
       - {
           label: "טיוטה / Draft",
           name: "draft",
           widget: "boolean",
           default: false,
-          i18n: duplicate,
         }
       - { 
           label: "תוכן HTML / HTML Content", 
           name: "htmlContent", 
           widget: "text",
           required: false,
-          i18n: true,
           hint: "תוכן מלא בפורמט HTML (אופציונלי) / Full HTML content (optional)"
         }
       - { 
@@ -166,7 +102,93 @@ collections:
           name: "body", 
           widget: "markdown", 
           required: false,
-          i18n: true,
+          hint: "השתמש ב-Markdown לפוסטים חדשים או ב-HTML למעלה לפוסטים קיימים / Use Markdown for new posts or HTML field above for existing posts"
+        }
+
+  # Blog Collection - English (Translations)
+  - name: "blog-en"
+    label: "Blog English / תרגומים לאנגלית"
+    folder: "src/content/blog/en"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "כותרת / Title", name: "title", widget: "string" }
+      - {
+          label: "תאריך פרסום / Publish Date",
+          name: "pubDate",
+          widget: "datetime",
+        }
+      - {
+          label: "תיאור / Description",
+          name: "description",
+          widget: "text",
+          required: false,
+        }
+      - {
+          label: "תמונה ראשית / Featured Image",
+          name: "featuredImage",
+          widget: "image",
+          required: false,
+        }
+      - {
+          label: "מחבר / Author",
+          name: "author",
+          widget: "string",
+          default: "Ron Geva",
+        }
+      - {
+          label: "זמן קריאה / Reading Time",
+          name: "readingTime",
+          widget: "string",
+          required: false,
+        }
+      - {
+          label: "צפיות / Views",
+          name: "views",
+          widget: "number",
+          default: 0,
+          required: false,
+        }
+      - {
+          label: "תגובות / Comments",
+          name: "comments",
+          widget: "number",
+          default: 0,
+          required: false,
+        }
+      - {
+          label: "לייקים / Likes",
+          name: "likes",
+          widget: "number",
+          default: 0,
+          required: false,
+        }
+      - {
+          label: "פריסת תמונות / Image Layout",
+          name: "imageLayout",
+          widget: "select",
+          required: false,
+          options: ["2-col", "3-col"],
+          default: "3-col",
+        }
+      - {
+          label: "טיוטה / Draft",
+          name: "draft",
+          widget: "boolean",
+          default: false,
+        }
+      - { 
+          label: "תוכן HTML / HTML Content", 
+          name: "htmlContent", 
+          widget: "text",
+          required: false,
+          hint: "תוכן מלא בפורמט HTML (אופציונלי) / Full HTML content (optional)"
+        }
+      - { 
+          label: "תוכן Markdown / Markdown Body", 
+          name: "body", 
+          widget: "markdown", 
+          required: false,
           hint: "השתמש ב-Markdown לפוסטים חדשים או ב-HTML למעלה לפוסטים קיימים / Use Markdown for new posts or HTML field above for existing posts"
         }
 
@@ -278,100 +300,3 @@ collections:
         }
       - { label: "תוכן מלא / Full Content", name: "body", widget: "markdown", i18n: true }
 
-  # Art Categories Collection
-  - name: "art-categories"
-    label: "קטגוריות אמנות / Art Categories"
-    folder: "src/content/art-categories"
-    extension: "json"
-    format: "json"
-    create: false
-    slug: "{{slug}}"
-    editor:
-      preview: false
-    fields:
-      - { label: "Slug", name: "slug", widget: "string" }
-      - label: "כותרת / Title"
-        name: "title"
-        widget: "object"
-        fields:
-          - { label: "עברית / Hebrew", name: "he", widget: "string" }
-          - { label: "אנגלית / English", name: "en", widget: "string" }
-      - { label: "תמונת תצוגה / Thumbnail", name: "thumbnail", widget: "image" }
-      - { label: "מספר תמונות / Image Count", name: "imageCount", widget: "number" }
-      - { label: "סדר תצוגה / Display Order", name: "order", widget: "number" }
-
-  # Art Images by Category
-  - name: "art-images-color"
-    label: "תמונות צבע / Color Images"
-    folder: "public/images/art/color"
-    create: true
-    media_folder: ""
-    public_folder: "/images/art/color"
-    extension: "jpg"
-    format: "frontmatter"
-    slug: "{{slug}}"
-    editor:
-      preview: false
-    fields:
-      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/color", public_folder: "/images/art/color" }
-      - { label: "כותרת / Title", name: "title", widget: "string", required: false }
-
-  - name: "art-images-bw"
-    label: "תמונות שחור לבן / B&W Images"
-    folder: "public/images/art/bw"
-    create: true
-    media_folder: ""
-    public_folder: "/images/art/bw"
-    extension: "jpg"
-    format: "frontmatter"
-    slug: "{{slug}}"
-    editor:
-      preview: false
-    fields:
-      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/bw", public_folder: "/images/art/bw" }
-      - { label: "כותרת / Title", name: "title", widget: "string", required: false }
-
-  - name: "art-images-sculptures"
-    label: "תמונות פסלים / Sculpture Images"
-    folder: "public/images/art/sculptures"
-    create: true
-    media_folder: ""
-    public_folder: "/images/art/sculptures"
-    extension: "jpg"
-    format: "frontmatter"
-    slug: "{{slug}}"
-    editor:
-      preview: false
-    fields:
-      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/sculptures", public_folder: "/images/art/sculptures" }
-      - { label: "כותרת / Title", name: "title", widget: "string", required: false }
-
-  - name: "art-images-portraits"
-    label: "תמונות דיוקנאות / Portrait Images"
-    folder: "public/images/art/portraits"
-    create: true
-    media_folder: ""
-    public_folder: "/images/art/portraits"
-    extension: "jpg"
-    format: "frontmatter"
-    slug: "{{slug}}"
-    editor:
-      preview: false
-    fields:
-      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/portraits", public_folder: "/images/art/portraits" }
-      - { label: "כותרת / Title", name: "title", widget: "string", required: false }
-
-  - name: "art-images-postcards"
-    label: "תמונות גלויות / Postcard Images"
-    folder: "public/images/art/postcards"
-    create: true
-    media_folder: ""
-    public_folder: "/images/art/postcards"
-    extension: "jpg"
-    format: "frontmatter"
-    slug: "{{slug}}"
-    editor:
-      preview: false
-    fields:
-      - { label: "תמונה / Image", name: "image", widget: "image", media_folder: "/public/images/art/postcards", public_folder: "/images/art/postcards" }
-      - { label: "כותרת / Title", name: "title", widget: "string", required: false }

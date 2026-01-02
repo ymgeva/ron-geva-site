@@ -5,24 +5,33 @@ import Lightbox from '../../../components/Lightbox.astro';
 import { getLangFromUrl, useTranslations } from '../../../utils/i18n';
 
 export async function getStaticPaths() {
-  const blogPosts = await getCollection('blog');
+  const allBlogPosts = await getCollection('blog');
   
-  return blogPosts
-    .filter(post => !post.data.draft)
-    .flatMap((post) => {
-      // Strip language prefix from slug (e.g., "he/filename" -> "filename")
-      const cleanSlug = post.slug.replace(/^(he|en)\//, '');
-      return [
-        {
-          params: { lang: 'he', slug: cleanSlug },
-          props: { post },
-        },
-        {
-          params: { lang: 'en', slug: cleanSlug },
-          props: { post },
-        },
-      ];
-    });
+  // Get Hebrew posts
+  const hebrewPosts = allBlogPosts.filter(post => post.id.startsWith('he/') && !post.data.draft);
+  
+  // Get English posts and create a map by slug
+  const englishPosts = allBlogPosts.filter(post => post.id.startsWith('en/') && !post.data.draft);
+  const englishPostMap = new Map(englishPosts.map(post => [post.slug, post]));
+  
+  // Generate paths for all Hebrew posts (available in both languages)
+  return hebrewPosts.flatMap((hePost) => {
+    // Strip language prefix from slug (e.g., "he/filename" -> "filename")
+    const cleanSlug = hePost.slug.replace(/^(he|en)\//, '');
+    const enPost = englishPostMap.get(hePost.slug);
+    
+    return [
+      {
+        params: { lang: 'he', slug: cleanSlug },
+        props: { post: hePost },
+      },
+      {
+        params: { lang: 'en', slug: cleanSlug },
+        // Use English post if available, otherwise use Hebrew
+        props: { post: enPost || hePost },
+      },
+    ];
+  });
 }
 
 type Props = {
