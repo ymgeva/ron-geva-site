@@ -1,16 +1,15 @@
 ---
-title: "אילמותבו"
+title: אילמותבו
 pubDate: 2025-09-27
-author: "Rongo Geva"
-readingTime: "זמן קריאה 1 דקות"
-description: "פנדה."
-featuredImage: "/images/blog-listing-2.jpg"
+description: פנדה.
+featuredImage: /images/blog-listing-2.jpg
+author: Rongo Geva
+readingTime: זמן קריאה 1 דקות
 views: 39
 comments: 0
 likes: 0
 draft: false
 ---
-
 פנדה.
 
 צבעים חזקים. נוכחות.
@@ -31,7 +30,7 @@ draft: false
 
 דרוש אי למות בו.
 
-![](/images/blog-ilmut-1.png)
+![]()
 
 ![אילמות](/images/blog-ilmut-2.jpg)
 
@@ -50,5 +49,3 @@ draft: false
 ![](/images/blog-ilmut-9.jpg)
 
 ![](/images/blog-ilmut-10.jpg)
-
-
