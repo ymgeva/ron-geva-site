@@ -55,7 +55,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'he' ? 'he-I
 
     <!-- Header -->
     <header class="mb-8">
-      <h1 class="text-4xl font-bold mb-4 font-alef">{post.data.title}</h1>
+      <h1 class="text-4xl mb-4" style={`font-family: ${isRTL ? 'Alef' : 'Source Sans 3'}, sans-serif;`}>{post.data.title}</h1>
       
       <!-- Meta info -->
       <div class="flex flex-wrap gap-4 text-gray-600 text-sm mb-4">
@@ -91,7 +91,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'he' ? 'he-I
     </header>
 
     <!-- Content -->
-    <div class="prose prose-lg max-w-none mb-8 font-alef blog-content">
+    <div class="prose prose-lg max-w-none mb-8 blog-content" style={`font-family: ${isRTL ? 'Alef' : 'Source Sans 3'}, sans-serif;`}>
       {post.data.htmlContent ? (
         <!-- Render HTML content if available -->
         <div set:html={post.data.htmlContent} />
@@ -103,7 +103,7 @@ const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'he' ? 'he-I
 
     <!-- Comments Section -->
     <div class="mt-12 pt-8 border-t border-gray-200">
-      <h2 class="text-2xl font-bold mb-6 font-alef">{isRTL ? 'תגובות' : 'Comments'}</h2>
+      <h2 class="text-2xl mb-6" style={`font-family: ${isRTL ? 'Alef' : 'Source Sans 3'}, sans-serif;`}>{isRTL ? 'תגובות' : 'Comments'}</h2>
       <div class="bg-gray-50 rounded-lg p-6 text-center text-gray-600">
         <i class="far fa-comments text-4xl mb-4 block"></i>
         <p>{isRTL ? 'מערכת תגובות תתווסף בקרוב' : 'Comments coming soon'}</p>

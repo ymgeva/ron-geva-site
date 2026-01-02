@@ -33,4 +33,16 @@ const artworks = defineCollection({
   }),
 });
 
-export const collections = { blog, artworks };
+const artCategories = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    image: z.string(),
+    count: z.number(),
+    order: z.number().default(0),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { blog, artworks, 'art-categories': artCategories };

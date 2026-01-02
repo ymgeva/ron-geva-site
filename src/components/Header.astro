@@ -14,59 +14,64 @@ const isActive = (path: string) => {
 ---
 
 <header class="bg-white border-b border-gray-200 shadow-sm">
-  <div class="container mx-auto px-4 py-6 max-w-7xl">
-    <!-- Logo and Title - Horizontal Layout -->
+  <div class="container mx-auto px-4 py-6" style="max-width: 1000px;">
+    <!-- Logo and Title - Horizontal Layout with Language Switcher -->
     <div class="flex items-center justify-between gap-8 mb-6">
-      <!-- Logo (right side for Hebrew, left for English) -->
-      <a href={translatePath('/')} class={`block ${lang === 'he' ? 'order-2' : 'order-1'}`}>
-        <img src="/images/home-1.png" alt="Ron Geva Logo" class="w-32 h-32 object-cover rounded-lg hover:opacity-80 transition" />
-      </a>
-      
-      <!-- Name and Tagline (left side for Hebrew, right for English) -->
-      <div class={`${lang === 'he' ? 'order-1 text-right' : 'order-2 text-left'}`}>
+      <!-- Name and Tagline (left side for Hebrew, left for English too) -->
+      <div class={`${lang === 'he' ? 'order-1 text-right' : 'order-1 text-left'} flex-1`}>
         <a href={translatePath('/')}>
-          <h1 class="text-4xl font-bold font-alef tracking-wider hover:text-gray-600 transition cursor-pointer">
+          <h1 class="text-4xl tracking-wider hover:text-gray-600 transition cursor-pointer" style={`font-family: ${lang === 'he' ? 'Alef' : 'Source Sans 3'}, sans-serif;`}>
             {lang === 'he' ? 'רון גבע' : 'Ron Geva'}
           </h1>
         </a>
-        <p class="text-lg text-gray-600 font-alef tracking-wide mt-1">
-          {lang === 'he' ? 'אמנות מהסוג המרגש' : 'Art That Moves'}
+        <p class="text-lg text-gray-600 tracking-wide mt-1" style={`font-family: ${lang === 'he' ? 'Alef' : 'Source Sans 3'}, sans-serif;`}>
+          {lang === 'he' ? 'אמנות מהסוג המרגש' : 'Art of the emotive kind'}
         </p>
+      </div>
+      
+      <!-- Right side: Language Switcher above Logo -->
+      <div class={`${lang === 'he' ? 'order-2' : 'order-2'} flex flex-col items-end gap-2`}>
+        <!-- Language Switcher - Top Right -->
+        <LanguageSwitcher />
+        
+        <!-- Logo -->
+        <a href={translatePath('/')} class="block">
+          <img src="/images/home-1.png" alt="Ron Geva Logo" class="w-32 h-32 object-cover rounded-lg hover:opacity-80 transition" />
+        </a>
       </div>
     </div>
     
-    <!-- Navigation - Full Width -->
-    <nav class="border-t border-gray-200 pt-4">
-      <ul class="flex items-center justify-between gap-1 flex-wrap">
-        <li>
-          <a href={translatePath('/about')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/about') ? 'bg-gray-200 font-bold' : ''}`}>
+    <!-- Navigation - Full Width with equal distribution -->
+    <nav style="background-color: #D2CEC5;">
+      <ul class="flex items-stretch" style="margin: 0; padding: 0; list-style: none;">
+        <li style="flex: 1;">
+          <a href={translatePath('/about')} class={`block px-6 text-center transition ${isActive('/about') ? '' : ''}`} style={`padding-top: 2px; padding-bottom: 2px; ${isActive('/about') ? 'background-color: #FFF8F1;' : ''}`}>
             {lang === 'he' ? 'אודות' : 'About'}
           </a>
         </li>
-        <li>
-          <a href={translatePath('/art')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/art') ? 'bg-gray-200 font-bold' : ''}`}>
+        <li style="flex: 1;">
+          <a href={translatePath('/art')} class={`block px-6 text-center transition ${isActive('/art') ? '' : ''}`} style={`padding-top: 2px; padding-bottom: 2px; ${isActive('/art') ? 'background-color: #FFF8F1;' : ''}`}>
             {lang === 'he' ? 'אמנות' : 'Art'}
           </a>
         </li>
-        <li>
-          <a href={translatePath('/book')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/book') ? 'bg-gray-200 font-bold' : ''}`}>
+        <li style="flex: 1;">
+          <a href={translatePath('/book')} class={`block px-6 text-center transition ${isActive('/book') ? '' : ''}`} style={`padding-top: 2px; padding-bottom: 2px; ${isActive('/book') ? 'background-color: #FFF8F1;' : ''}`}>
             {lang === 'he' ? 'ספר' : 'Book'}
           </a>
         </li>
-        <li>
-          <a href={translatePath('/blog')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/blog') ? 'bg-gray-200 font-bold' : ''}`}>
+        <li style="flex: 1;">
+          <a href={translatePath('/blog')} class={`block px-6 text-center transition ${isActive('/blog') ? '' : ''}`} style={`padding-top: 2px; padding-bottom: 2px; ${isActive('/blog') ? 'background-color: #FFF8F1;' : ''}`}>
             {lang === 'he' ? 'בלוג' : 'Blog'}
           </a>
-        </li>
-        <li>
-          <a href={translatePath('/alligators')} class={`px-6 py-2 hover:bg-gray-100 transition font-medium ${isActive('/alligators') ? 'bg-gray-200 font-bold' : ''}`}>
-            {lang === 'he' ? 'תנינים' : 'Alligators'}
-          </a>
-        </li>
-        <li>
-          <LanguageSwitcher />
         </li>
       </ul>
     </nav>
   </div>
 </header>
+
+<style>
+  nav ul li a:hover {
+    background-color: #5B4D43 !important;
+    color: white !important;
+  }
+</style>

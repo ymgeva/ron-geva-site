@@ -2,28 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Google Fonts - Alef (Hebrew) and Fahkwang */
-@import url('https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Fahkwang:wght@300;400;500;600;700&display=swap');
+/* Google Fonts - Alef (Hebrew) and Source Sans 3 (English) */
+@import url('https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap');
 
 /* RTL Support */
 [dir='rtl'] {
   direction: rtl;
   text-align: right;
+  font-family: 'Alef', sans-serif;
 }
 
 [dir='ltr'] {
   direction: ltr;
   text-align: left;
+  font-family: 'Source Sans 3', sans-serif;
 }
 
 /* Base styles */
 body {
-  @apply font-alef;
+  font-family: 'Source Sans 3', sans-serif;
+}
+
+/* RTL body uses Alef */
+body[dir='rtl'], [dir='rtl'] body {
+  font-family: 'Alef', sans-serif;
 }
 
 /* Headings */
 h1, h2, h3, h4, h5, h6 {
-  @apply font-fahkwang;
+  font-family: inherit;
 }
 
 /* Ensure images are responsive */

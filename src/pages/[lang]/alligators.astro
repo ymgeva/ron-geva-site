@@ -35,9 +35,20 @@ const gridImages = Array.from({ length: 9 }, (_, i) => `/images/alligators-${i +
 
 <BaseLayout title={t.title} lang={lang}>
   <div class="max-w-7xl mx-auto px-4 py-12 space-y-12">
+    <!-- Back to Art Button -->
+    <div class="mb-8">
+      <a 
+        href={`/${lang}/art`}
+        class="text-gray-600 hover:text-gray-900 transition inline-flex items-center gap-2 mb-4"
+      >
+        <span class="text-xl">{lang === 'he' ? '→' : '←'}</span>
+        {lang === 'he' ? 'חזרה לאומנות' : 'Back to Art'}
+      </a>
+    </div>
+    
     <!-- Title Section -->
     <div class="text-center space-y-4 mb-8">
-      <h1 class="text-3xl md:text-4xl font-bold">{t.title}</h1>
+      <h1 class="text-3xl md:text-4xl">{t.title}</h1>
       <p class="text-lg text-gray-700">{t.subtitle}</p>
     </div>
 
@@ -59,7 +70,7 @@ const gridImages = Array.from({ length: 9 }, (_, i) => `/images/alligators-${i +
     <div class="max-w-4xl mx-auto space-y-12 mt-16">
       <!-- Exhibition Photo 1 -->
       <div class="space-y-4">
-        <h2 class="text-2xl font-bold text-center">{t.exhibitionTitle1}</h2>
+        <h2 class="text-2xl text-center">{t.exhibitionTitle1}</h2>
         <div class="overflow-hidden rounded-lg shadow-lg">
           <img
             src="/images/alligators-11.jpg"
@@ -72,7 +83,7 @@ const gridImages = Array.from({ length: 9 }, (_, i) => `/images/alligators-${i +
 
       <!-- Exhibition Photo 2 -->
       <div class="space-y-4">
-        <h2 class="text-2xl font-bold text-center">{t.exhibitionTitle2}</h2>
+        <h2 class="text-2xl text-center">{t.exhibitionTitle2}</h2>
         <div class="overflow-hidden rounded-lg shadow-lg">
           <a
             href={t.exhibitionLink}

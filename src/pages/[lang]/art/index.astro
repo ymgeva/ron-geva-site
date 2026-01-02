@@ -41,6 +41,12 @@ const categories = {
       image: '/images/art-postcards-2.jpg',
       count: 13,
     },
+    {
+      slug: 'alligators',
+      title: 'תנינים',
+      image: '/images/alligators-1.jpg',
+      count: 10,
+    },
   ],
   en: [
     {
@@ -73,6 +79,12 @@ const categories = {
       image: '/images/art-postcards-2.jpg',
       count: 13,
     },
+    {
+      slug: 'alligators',
+      title: 'Alligators',
+      image: '/images/alligators-1.jpg',
+      count: 10,
+    },
   ],
 };
 
@@ -82,25 +94,22 @@ const currentCategories = categories[lang as keyof typeof categories] || categor
 
 <BaseLayout title={pageTitle}>
   <div class="container mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold mb-12 text-center font-fahkwang">{pageTitle}</h1>
+    <h1 class="text-4xl mb-12 text-center">{pageTitle}</h1>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
       {currentCategories.map((category) => (
         <a
           href={translatePath(`/art/${category.slug}`)}
           class="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
         >
-          <div class="aspect-square">
+          <div class="aspect-[16/9]">
             <img
               src={category.image}
               alt={category.title}
               class="w-full h-full object-cover"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-100 group-hover:opacity-90 transition-opacity">
-              <div class="absolute bottom-0 left-0 right-0 p-6">
-                <h2 class="text-white text-2xl font-bold mb-2 font-fahkwang">{category.title}</h2>
-                <p class="text-white/80 text-sm">{category.count} {lang === 'he' ? 'עבודות' : 'works'}</p>
-              </div>
+            <div class="absolute top-0 {lang === 'he' ? 'right-0' : 'left-0'} text-white px-6" style="background-color: rgba(128, 126, 125, 0.8); height: 33pt; display: flex; align-items: center;">
+              <span style={`font-size: 18pt; font-family: ${lang === 'he' ? 'Alef' : 'Source Sans 3'}, sans-serif;`}>{category.title}</span>
             </div>
           </div>
         </a>

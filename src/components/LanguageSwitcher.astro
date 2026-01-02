@@ -1,22 +1,36 @@
 ---
-import { getLangFromUrl, languages } from '../utils/i18n';
+import { getLangFromUrl } from '../utils/i18n';
 
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname.replace(`/${lang}`, '');
+
+const languageLabels: Record<string, string> = {
+  'en': 'En',
+  'he': 'He'
+};
 ---
 
-<div class="flex gap-2">
-  {Object.entries(languages).map(([code, label]) => (
+<div class="flex gap-1">
+  {Object.keys(languageLabels).map((code) => (
     <a
       href={`/${code}${currentPath}`}
-      class:list={[
-        'px-3 py-1 rounded transition',
-        lang === code
-          ? 'bg-gray-900 text-white'
-          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-      ]}
+      class="transition"
+      style={`
+        padding: 2px 8px;
+        background-color: ${lang === code ? '#FFF8F1' : '#D2CEC5'};
+        color: ${lang === code ? '#000' : '#333'};
+        text-decoration: none;
+        font-size: 14px;
+      `}
     >
-      {label}
+      {languageLabels[code]}
     </a>
   ))}
 </div>
+
+<style>
+  div a:hover {
+    background-color: #5B4D43 !important;
+    color: white !important;
+  }
+</style>
