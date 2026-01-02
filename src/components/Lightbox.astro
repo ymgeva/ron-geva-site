@@ -35,9 +35,6 @@
       class="max-w-full max-h-[90vh] object-contain"
     />
   </div>
-  
-  <div id="lightbox-caption" class="absolute bottom-4 left-0 right-0 text-center text-white text-lg px-4">
-  </div>
 </div>
 
 <script>
@@ -47,7 +44,6 @@
   function initLightbox() {
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
-    const lightboxCaption = document.getElementById('lightbox-caption');
     const closeBtn = document.getElementById('lightbox-close');
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
@@ -91,9 +87,6 @@
       if (lightboxImage && img) {
         lightboxImage.src = img.src;
         lightboxImage.alt = img.alt;
-      }
-      if (lightboxCaption) {
-        lightboxCaption.textContent = img.alt || '';
       }
     };
     
