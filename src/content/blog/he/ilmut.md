@@ -1,15 +1,82 @@
 ---
-title: "אילמותבו"
-pubDate: 2025-09-27
-author: "Rongo Geva"
-readingTime: "זמן קריאה 1 דקות"
-description: "פנדה.  צבעים חזקים. נוכחות.  שכבה של בהיר. כיסוי. הסתרה.  אילמות זה אי למות בו. זה לדעת שכל הגה שתוציאי, כל מבט, יביא עלייך השמדה, השפלה, הקטנה והשתקה..."
-featuredImage: "/images/blog-listing-2.jpg"
-htmlContent: "<div><div><div  dir=\"rtl\"><div><div type=\"first\"></div><div><p  dir=\"auto\"><span><span>פנדה.</span></span></p></div><div type=\"paragraph\"></div><div><p  dir=\"auto\"><span><span>צבעים חזקים. נוכחות.</span></span></p></div><div type=\"paragraph\"></div><div><p  dir=\"auto\"><span><span>שכבה של בהיר. כיסוי. הסתרה.</span></span></p></div><div type=\"paragraph\"></div><div><div  dir=\"auto\"><span><br role=\"presentation\"></span></div><div type=\"empty-line\"></div><div><div><div><img src=\"/images/blog-ilmut-2.jpg\" alt=\"אילמות\"    draggable=\"false\"  fetchpriority=\"high\"></div><div></div><div></div><div></div></div><div type=\"image\"></div><div><div  dir=\"auto\"><span><br role=\"presentation\"></span></div><div type=\"empty-line\"></div><div><div><div   role=\"none\"><div><div   tabindex=\"-1\"><div></div><div  role=\"region\"><div><div     tabindex=\"-1\"><div><div    tabindex=\"0\"  aria-label=\"image\" role=\"link\"></div><div><div><img    loading=\"eager\"  alt=\"\" src=\"/images/blog-ilmut-3.jpg\"></div><div><div></div></div></div></div><div     tabindex=\"-1\"><div><div    tabindex=\"-1\"  aria-label=\"image\" role=\"link\"></div><div><div><img    loading=\"eager\"  alt=\"\" src=\"/images/blog-ilmut-4.jpg\"></div><div><div></div></div></div></div></div></div><div></div></div><div><script>try {\n            window.requestAnimationFrame(function() {\n              \n  \n      var ele = document.getElementById('pro-gallery-a9s7l629-not-scoped');\n      var pgMeasures = ele.getBoundingClientRect();\n      var options = (() => \"gallerySizeType:px|enableInfiniteScroll:true|titlePlacement:SHOW_ON_HOVER|hasThumbnails:false|imageMargin:5|galleryLayout:6|isVertical:false|cubeType:fill|galleryThumbnailsAlignment:none\")(ele);\n      var width = pgMeasures.width;\n      var height = pgMeasures.height;\n\n      var isIOS = /iPad|iPhone|iPod/.test(navigator?.userAgent);\n      if(isIOS) {\n        width = width;\n        width = width;\n        height = height;\n        height = height;\n      } else {\n        width = width;\n        width = width;\n        height = height;\n        height = height;\n      }\n\n      pgMeasures = { top: pgMeasures.top, width, height };\n\n  var isVertical = options.includes('layoutParams_structure_scrollDirection:\"VERTICAL\"');\n  var layoutFixerUrl =  '/_serverless/pro-gallery-css-v4-server/layoutCss?ver=2&id=a9s7l629-not-scoped&items=3372_3523_1297|3245_3700_1381&container=' + pgMeasures.top + '_' + pgMeasures.width + '_' + pgMeasures.height + '_' + window.innerHeight + '&options=' + options;\n  document.getElementById('layout-fixer-style-a9s7l629-not-scoped').setAttribute('href', encodeURI(layoutFixerUrl));\n});\n\n  \n        } catch (e) {\n          console.warn('Cannot set layoutFixer css', e);\n        }</script></div></div></div><div type=\"gallery\"></div><div><div  dir=\"auto\"><span><br role=\"presentation\"></span></div><div type=\"empty-line\"></div><div><div  dir=\"auto\"><span><br role=\"presentation\"></span></div><div type=\"empty-line\"></div><div><div><div   role=\"none\"><div><div   tabindex=\"-1\"><div></div><div  role=\"region\"><div><div     tabindex=\"-1\"><div><div    tabindex=\"0\"  aria-label=\"image\" role=\"link\"></div><div><div><img    loading=\"eager\"  alt=\"\" src=\"/images/blog-ilmut-5.jpg\"></div><div><div></div></div></div></div><div     tabindex=\"-1\"><div><div    tabindex=\"-1\"  aria-label=\"image\" role=\"link\"></div><div><div><img    loading=\"eager\"  alt=\"\" src=\"/images/blog-ilmut-6.jpg\"></div><div><div></div></div></div></div><div     tabindex=\"-1\"><div><div    tabindex=\"-1\"  aria-label=\"image\" role=\"link\"></div><div><div><img    loading=\"eager\"  alt=\"\" src=\"/images/blog-ilmut-7.jpg\"></div><div><div></div></div></div></div><div     tabindex=\"-1\"><div><div    tabindex=\"-1\"  aria-label=\"image\" role=\"link\"></div><div><div><img    loading=\"eager\"  alt=\"\" src=\"/images/blog-ilmut-8.jpg\"></div><div><div></div></div></div></div><div     tabindex=\"-1\"><div><div    tabindex=\"-1\"  aria-label=\"image\" role=\"link\"></div><div><div><img    loading=\"eager\"  alt=\"\" src=\"/images/blog-ilmut-9.jpg\"></div><div><div></div></div></div></div><div     tabindex=\"-1\"><div><div    tabindex=\"-1\"  aria-label=\"image\" role=\"link\"></div><div><div><img    loading=\"eager\"  alt=\"\" src=\"/images/blog-ilmut-10.jpg\"></div><div><div></div></div></div></div></div></div><div></div></div><div><script>try {\n            window.requestAnimationFrame(function() {\n              \n  \n      var ele = document.getElementById('pro-gallery-k7lq6799-not-scoped');\n      var pgMeasures = ele.getBoundingClientRect();\n      var options = (() => \"gallerySizeType:px|enableInfiniteScroll:true|titlePlacement:SHOW_ON_HOVER|gridStyle:1|imageMargin:5|galleryLayout:2|isVertical:true|numberOfImagesPerRow:3|cubeRatio:1|cubeType:fill|galleryThumbnailsAlignment:none\")(ele);\n      var width = pgMeasures.width;\n      var height = pgMeasures.height;\n\n      var isIOS = /iPad|iPhone|iPod/.test(navigator?.userAgent);\n      if(isIOS) {\n        width = width;\n        width = width;\n        height = height;\n        height = height;\n      } else {\n        width = width;\n        width = width;\n        height = height;\n        height = height;\n      }\n\n      pgMeasures = { top: pgMeasures.top, width, height };\n\n  var isVertical = options.includes('layoutParams_structure_scrollDirection:\"VERTICAL\"');\n  var layoutFixerUrl =  '/_serverless/pro-gallery-css-v4-server/layoutCss?ver=2&id=k7lq6799-not-scoped&items=3384_3024_4032|3595_4032_3024|3345_4032_3024|3493_3629_2722|3512_3024_4032|3468_4032_3024&container=' + pgMeasures.top + '_' + pgMeasures.width + '_' + pgMeasures.height + '_' + window.innerHeight + '&options=' + options;\n  document.getElementById('layout-fixer-style-k7lq6799-not-scoped').setAttribute('href', encodeURI(layoutFixerUrl));\n});\n\n  \n        } catch (e) {\n          console.warn('Cannot set layoutFixer css', e);\n        }</script></div></div></div><div type=\"gallery\"></div><div><div  dir=\"auto\"><span><br role=\"presentation\"></span></div><div type=\"empty-line\"></div><div><p  dir=\"auto\"><span><span>אילמות זה אי למות בו. זה לדעת שכל הגה שתוציאי, כל מבט, יביא עלייך השמדה, השפלה, הקטנה והשתקה. כל דבר שתעשי יהיה טעות. גורלית.</span></span></p></div><div type=\"paragraph\"></div><div><p  dir=\"auto\"><span><span>יש בפנים הרבה רעש, גלים, סחף. הראש מסתחרר מקולות זרים וקולות מוכרים וקולות משום מקום ומכל מקום, וכולם מיטשטשים ומתערבלים. זה חייב להיות ככה, שטוח, נטול אדוות, לא נראה, לא נשמע. כל סימן שאשאיר בעולם, כל עקבות, יובילו את הטורפים לפִתחי. \"תהיי מתה, תהיי מתה\" אומר אבא ליובלי.</span></span></p></div><div type=\"paragraph\"></div><div><p  dir=\"auto\"><span><span>לא להוציא מילה, לא ליישר מבט. לא לגלות להם שאני קיימת, לא לחשוף שיש פה איזשהו רמז לנוכחות, לקיום. שיפסחו. שיפסחו עלי.</span></span></p></div><div type=\"paragraph\"></div><div><p  dir=\"auto\"><span><span>והכובד של המילים מושך אותי למטה ואני לא יכולה לקום, לא יכולה להרים את הראש. הן רוקדות לי על כל הגוף, המון מילים, מנסות להנשים אותי, מנסות לדגדג - הן יסתפקו גם בקול של צחוק. אבל אני יודעת מה מחכה לי בחוץ, הן לא.</span></span></p></div><div type=\"paragraph\"></div><div><p  dir=\"auto\"><span><span>חובה לכסות הכל בצבעי הסוואה, להתמזג, להיעלם, להטביע את המילים בחבית ולכסות ולקבור, לקבור עד שיעבור. </span></span></p></div><div type=\"paragraph\"></div><div><p  dir=\"auto\"><span><span>אבל זה אף פעם לא עובר, לא פוסח. תמיד נשארת איזו קווצת שיער בחוץ, והם באים עם גרזיני שַמות, ועם לשון משורבבת, לחַלֶל ולשבור ולהשתמש לחלפים.</span></span></p></div><div type=\"paragraph\"></div><div><div  dir=\"auto\"><span><br role=\"presentation\"></span></div><div type=\"empty-line\"></div><div><p  dir=\"auto\"><span><span>דרוש אי למות בו.</span></span></p></div><div type=\"paragraph\"></div><div type=\"last\"></div></div></div>"
+title: אילמותבו
+pubDate: 2025-09-27T00:00:00.000Z
+author: Rongo Geva
+readingTime: זמן קריאה 1 דקות
+description: פנדה.  צבעים חזקים. נוכחות.  שכבה של בהיר. כיסוי. הסתרה.  אילמות זה אי למות בו. זה לדעת שכל הגה שתוציאי, כל מבט, יביא עלייך השמדה, השפלה, הקטנה והשתקה...
+featuredImage: /images/blog-listing-2.jpg
+htmlContent: |-
+  <div><div><div  dir="rtl"><div><div type="first"></div><div><p  dir="auto"><span><span>פנדה.</span></span></p></div><div type="paragraph"></div><div><p  dir="auto"><span><span>צבעים חזקים. נוכחות.</span></span></p></div><div type="paragraph"></div><div><p  dir="auto"><span><span>שכבה של בהיר. כיסוי. הסתרה.</span></span></p></div><div type="paragraph"></div><div><div  dir="auto"><span><br role="presentation"></span></div><div type="empty-line"></div><div><div><div><img src="/images/blog-ilmut-2.jpg" alt="אילמות"    draggable="false"  fetchpriority="high"></div><div></div><div></div><div></div></div><div type="image"></div><div><div  dir="auto"><span><br role="presentation"></span></div><div type="empty-line"></div><div><div><div   role="none"><div><div   tabindex="-1"><div></div><div  role="region"><div><div     tabindex="-1"><div><div    tabindex="0"  aria-label="image" role="link"></div><div><div><img    loading="eager"  alt="" src="/images/blog-ilmut-3.jpg"></div><div><div></div></div></div></div><div     tabindex="-1"><div><div    tabindex="-1"  aria-label="image" role="link"></div><div><div><img    loading="eager"  alt="" src="/images/blog-ilmut-4.jpg"></div><div><div></div></div></div></div></div></div><div></div></div><div><script>try {
+              window.requestAnimationFrame(function() {
+                
+    
+        var ele = document.getElementById('pro-gallery-a9s7l629-not-scoped');
+        var pgMeasures = ele.getBoundingClientRect();
+        var options = (() => "gallerySizeType:px|enableInfiniteScroll:true|titlePlacement:SHOW_ON_HOVER|hasThumbnails:false|imageMargin:5|galleryLayout:6|isVertical:false|cubeType:fill|galleryThumbnailsAlignment:none")(ele);
+        var width = pgMeasures.width;
+        var height = pgMeasures.height;
+
+        var isIOS = /iPad|iPhone|iPod/.test(navigator?.userAgent);
+        if(isIOS) {
+          width = width;
+          width = width;
+          height = height;
+          height = height;
+        } else {
+          width = width;
+          width = width;
+          height = height;
+          height = height;
+        }
+
+        pgMeasures = { top: pgMeasures.top, width, height };
+
+    var isVertical = options.includes('layoutParams_structure_scrollDirection:"VERTICAL"');
+    var layoutFixerUrl =  '/_serverless/pro-gallery-css-v4-server/layoutCss?ver=2&id=a9s7l629-not-scoped&items=3372_3523_1297|3245_3700_1381&container=' + pgMeasures.top + '_' + pgMeasures.width + '_' + pgMeasures.height + '_' + window.innerHeight + '&options=' + options;
+    document.getElementById('layout-fixer-style-a9s7l629-not-scoped').setAttribute('href', encodeURI(layoutFixerUrl));
+  });
+
+    
+          } catch (e) {
+            console.warn('Cannot set layoutFixer css', e);
+          }</script></div></div></div><div type="gallery"></div><div><div  dir="auto"><span><br role="presentation"></span></div><div type="empty-line"></div><div><div  dir="auto"><span><br role="presentation"></span></div><div type="empty-line"></div><div><div><div   role="none"><div><div   tabindex="-1"><div></div><div  role="region"><div><div     tabindex="-1"><div><div    tabindex="0"  aria-label="image" role="link"></div><div><div><img    loading="eager"  alt="" src="/images/blog-ilmut-5.jpg"></div><div><div></div></div></div></div><div     tabindex="-1"><div><div    tabindex="-1"  aria-label="image" role="link"></div><div><div><img    loading="eager"  alt="" src="/images/blog-ilmut-6.jpg"></div><div><div></div></div></div></div><div     tabindex="-1"><div><div    tabindex="-1"  aria-label="image" role="link"></div><div><div><img    loading="eager"  alt="" src="/images/blog-ilmut-7.jpg"></div><div><div></div></div></div></div><div     tabindex="-1"><div><div    tabindex="-1"  aria-label="image" role="link"></div><div><div><img    loading="eager"  alt="" src="/images/blog-ilmut-8.jpg"></div><div><div></div></div></div></div><div     tabindex="-1"><div><div    tabindex="-1"  aria-label="image" role="link"></div><div><div><img    loading="eager"  alt="" src="/images/blog-ilmut-9.jpg"></div><div><div></div></div></div></div><div     tabindex="-1"><div><div    tabindex="-1"  aria-label="image" role="link"></div><div><div><img    loading="eager"  alt="" src="/images/blog-ilmut-10.jpg"></div><div><div></div></div></div></div></div></div><div></div></div><div><script>try {
+              window.requestAnimationFrame(function() {
+                
+    
+        var ele = document.getElementById('pro-gallery-k7lq6799-not-scoped');
+        var pgMeasures = ele.getBoundingClientRect();
+        var options = (() => "gallerySizeType:px|enableInfiniteScroll:true|titlePlacement:SHOW_ON_HOVER|gridStyle:1|imageMargin:5|galleryLayout:2|isVertical:true|numberOfImagesPerRow:3|cubeRatio:1|cubeType:fill|galleryThumbnailsAlignment:none")(ele);
+        var width = pgMeasures.width;
+        var height = pgMeasures.height;
+
+        var isIOS = /iPad|iPhone|iPod/.test(navigator?.userAgent);
+        if(isIOS) {
+          width = width;
+          width = width;
+          height = height;
+          height = height;
+        } else {
+          width = width;
+          width = width;
+          height = height;
+          height = height;
+        }
+
+        pgMeasures = { top: pgMeasures.top, width, height };
+
+    var isVertical = options.includes('layoutParams_structure_scrollDirection:"VERTICAL"');
+    var layoutFixerUrl =  '/_serverless/pro-gallery-css-v4-server/layoutCss?ver=2&id=k7lq6799-not-scoped&items=3384_3024_4032|3595_4032_3024|3345_4032_3024|3493_3629_2722|3512_3024_4032|3468_4032_3024&container=' + pgMeasures.top + '_' + pgMeasures.width + '_' + pgMeasures.height + '_' + window.innerHeight + '&options=' + options;
+    document.getElementById('layout-fixer-style-k7lq6799-not-scoped').setAttribute('href', encodeURI(layoutFixerUrl));
+  });
+
+    
+          } catch (e) {
+            console.warn('Cannot set layoutFixer css', e);
+          }</script></div></div></div><div type="gallery"></div><div><div  dir="auto"><span><br role="presentation"></span></div><div type="empty-line"></div><div><p  dir="auto"><span><span>אילמות זה אי למות בו. זה לדעת שכל הגה שתוציאי, כל מבט, יביא עלייך השמדה, השפלה, הקטנה והשתקה. כל דבר שתעשי יהיה טעות. גורלית.</span></span></p></div><div type="paragraph"></div><div><p  dir="auto"><span><span>יש בפנים הרבה רעש, גלים, סחף. הראש מסתחרר מקולות זרים וקולות מוכרים וקולות משום מקום ומכל מקום, וכולם מיטשטשים ומתערבלים. זה חייב להיות ככה, שטוח, נטול אדוות, לא נראה, לא נשמע. כל סימן שאשאיר בעולם, כל עקבות, יובילו את הטורפים לפִתחי. "תהיי מתה, תהיי מתה" אומר אבא ליובלי.</span></span></p></div><div type="paragraph"></div><div><p  dir="auto"><span><span>לא להוציא מילה, לא ליישר מבט. לא לגלות להם שאני קיימת, לא לחשוף שיש פה איזשהו רמז לנוכחות, לקיום. שיפסחו. שיפסחו עלי.</span></span></p></div><div type="paragraph"></div><div><p  dir="auto"><span><span>והכובד של המילים מושך אותי למטה ואני לא יכולה לקום, לא יכולה להרים את הראש. הן רוקדות לי על כל הגוף, המון מילים, מנסות להנשים אותי, מנסות לדגדג - הן יסתפקו גם בקול של צחוק. אבל אני יודעת מה מחכה לי בחוץ, הן לא.</span></span></p></div><div type="paragraph"></div><div><p  dir="auto"><span><span>חובה לכסות הכל בצבעי הסוואה, להתמזג, להיעלם, להטביע את המילים בחבית ולכסות ולקבור, לקבור עד שיעבור. </span></span></p></div><div type="paragraph"></div><div><p  dir="auto"><span><span>אבל זה אף פעם לא עובר, לא פוסח. תמיד נשארת איזו קווצת שיער בחוץ, והם באים עם גרזיני שַמות, ועם לשון משורבבת, לחַלֶל ולשבור ולהשתמש לחלפים.</span></span></p></div><div type="paragraph"></div><div><div  dir="auto"><span><br role="presentation"></span></div><div type="empty-line"></div><div><p  dir="auto"><span><span>דרוש אי למות בו.</span></span></p></div><div type="paragraph"></div><div type="last"></div></div></div>
 views: 39
 comments: 0
 likes: 0
-imageLayout: "3-col"
+imageLayout: 3-col
 draft: false
 ---
 

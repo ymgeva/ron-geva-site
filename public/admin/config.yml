@@ -93,8 +93,10 @@ collections:
       - { 
           label: "תוכן HTML / HTML Content", 
           name: "htmlContent", 
-          widget: "text",
+          widget: "code",
           required: false,
+          default_language: "html",
+          allow_language_selection: false,
           hint: "תוכן מלא בפורמט HTML (אופציונלי) / Full HTML content (optional)"
         }
       - { 
@@ -180,8 +182,10 @@ collections:
       - { 
           label: "תוכן HTML / HTML Content", 
           name: "htmlContent", 
-          widget: "text",
+          widget: "code",
           required: false,
+          default_language: "html",
+          allow_language_selection: false,
           hint: "תוכן מלא בפורמט HTML (אופציונלי) / Full HTML content (optional)"
         }
       - { 
