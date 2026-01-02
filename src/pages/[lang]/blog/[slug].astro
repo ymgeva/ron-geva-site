@@ -101,13 +101,8 @@ const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'he' ? 'he-I
 
     <!-- Content -->
     <div class="prose prose-lg max-w-none mb-8 blog-content" style={`font-family: ${isRTL ? 'Alef' : 'Source Sans 3'}, sans-serif;`}>
-      {post.data.htmlContent ? (
-        <!-- Render HTML content if available -->
-        <div set:html={post.data.htmlContent} />
-      ) : (
-        <!-- Fallback to markdown -->
-        <Content />
-      )}
+      {/* Render markdown content (new format) */}
+      <Content />
     </div>
 
     <!-- Comments Section -->

@@ -1,3 +1,6 @@
+# Use local_backend for local development
+local_backend: true
+
 backend:
   name: git-gateway
   branch: main
@@ -24,6 +27,7 @@ collections:
     folder: "src/content/blog/he"
     create: true
     slug: "{{slug}}"
+    identifier_field: title
     fields:
       - { label: "כותרת / Title", name: "title", widget: "string" }
       - {
@@ -91,20 +95,9 @@ collections:
           default: false,
         }
       - { 
-          label: "תוכן HTML / HTML Content", 
-          name: "htmlContent", 
-          widget: "code",
-          required: false,
-          default_language: "html",
-          allow_language_selection: false,
-          hint: "תוכן מלא בפורמט HTML (אופציונלי) / Full HTML content (optional)"
-        }
-      - { 
-          label: "תוכן Markdown / Markdown Body", 
+          label: "תוכן / Body", 
           name: "body", 
-          widget: "markdown", 
-          required: false,
-          hint: "השתמש ב-Markdown לפוסטים חדשים או ב-HTML למעלה לפוסטים קיימים / Use Markdown for new posts or HTML field above for existing posts"
+          widget: "markdown"
         }
 
   # Blog Collection - English (Translations)
@@ -113,6 +106,7 @@ collections:
     folder: "src/content/blog/en"
     create: true
     slug: "{{slug}}"
+    identifier_field: title
     fields:
       - { label: "כותרת / Title", name: "title", widget: "string" }
       - {
@@ -180,20 +174,9 @@ collections:
           default: false,
         }
       - { 
-          label: "תוכן HTML / HTML Content", 
-          name: "htmlContent", 
-          widget: "code",
-          required: false,
-          default_language: "html",
-          allow_language_selection: false,
-          hint: "תוכן מלא בפורמט HTML (אופציונלי) / Full HTML content (optional)"
-        }
-      - { 
-          label: "תוכן Markdown / Markdown Body", 
+          label: "תוכן / Body", 
           name: "body", 
-          widget: "markdown", 
-          required: false,
-          hint: "השתמש ב-Markdown לפוסטים חדשים או ב-HTML למעלה לפוסטים קיימים / Use Markdown for new posts or HTML field above for existing posts"
+          widget: "markdown"
         }
 
   # Pages Collection

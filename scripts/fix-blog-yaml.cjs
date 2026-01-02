@@ -25,13 +25,37 @@ files.forEach(filename => {
     // Parse the frontmatter
     const data = yaml.load(frontmatterRaw);
     
-    // Convert htmlContent to proper YAML literal block scalar if it exists and is long
-    const newFrontmatter = yaml.dump(data, {
-      lineWidth: -1, // Don't wrap lines
-      noRefs: true,
-      quotingType: '"',
-      forceQuotes: false,
-    });
+    // Manually build frontmatter with proper formatting for long fields
+    let newFrontmatter = '';
+    
+    for (const [key, value] of Object.entries(data)) {
+      if (key === 'htmlContent' && value && value.length > 100) {
+        // Use literal block scalar (|) for long HTML content
+        newFrontmatter += `${key}: |\n`;
+        newFrontmatter += `  ${value}\n`;
+      } else if (key === 'description' && value && value.length > 80) {
+        // Use folded block scalar (>) for long descriptions
+        newFrontmatter += `${key}: >\n`;
+        newFrontmatter += `  ${value}\n`;
+      } else if (typeof value === 'string') {
+        // Quote strings if they contain special characters
+        if (value.includes(':') || value.includes('#') || value.includes('\n')) {
+          newFrontmatter += `${key}: "${value.replace(/"/g, '\\"')}"\n`;
+        } else {
+          newFrontmatter += `${key}: ${value}\n`;
+        }
+      } else if (typeof value === 'boolean') {
+        newFrontmatter += `${key}: ${value}\n`;
+      } else if (typeof value === 'number') {
+        newFrontmatter += `${key}: ${value}\n`;
+      } else if (value instanceof Date) {
+        newFrontmatter += `${key}: ${value.toISOString()}\n`;
+      } else if (value === null || value === undefined) {
+        // Skip null/undefined values
+      } else {
+        newFrontmatter += `${key}: ${JSON.stringify(value)}\n`;
+      }
+    }
     
     // Write back
     const newContent = `---\n${newFrontmatter}---${body}`;
